@@ -41,7 +41,7 @@ export default function RegisterPage() {
         >
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-gray-500 to-white" />
           <div className="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-6">
-            <CheckCircle2 className="w-10 h-10 text-white" />
+            <CheckCircle2 className="w-10 h-10 text-green-400" />
           </div>
           <h2 className="text-3xl font-bold mb-4">Application Received!</h2>
           <p className="text-gray-400 mb-8">
@@ -147,7 +147,7 @@ export default function RegisterPage() {
               <label className="block text-sm font-medium text-gray-300 mb-2">Payment Proof (PDF/JPG/PNG)</label>
               <div className="w-full border-2 border-dashed border-white/10 rounded-xl p-8 hover:bg-white/5 hover:border-white/20 transition-colors cursor-pointer flex flex-col items-center justify-center text-gray-400 group relative">
                 <input type="file" className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" required />
-                <UploadCloud className="w-8 h-8 mb-3 group-hover:text-white transition-colors" />
+                <UploadCloud className="w-8 h-8 mb-3 group-hover:text-blue-400 transition-colors" />
                 <span className="text-sm">Click to upload or drag and drop</span>
                 <span className="text-xs text-gray-600 mt-1">Max file size: 5MB</span>
               </div>

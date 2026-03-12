@@ -8,7 +8,7 @@ export function WhatWeBuildSection() {
     {
       id: "embedded",
       title: "Embedded Systems",
-      icon: <Cpu className="w-10 h-10 text-gray-300" />,
+      icon: <Cpu className="w-10 h-10 text-green-400" />,
       description: "Designing and programming microcontroller-based systems (STM32, ESP32, Arduino) that serve as the brain of our robotics applications, ensuring real-time response and reliability.",
       color: "from-white/[0.05] to-transparent",
       borderColor: "border-white/10",
@@ -16,7 +16,7 @@ export function WhatWeBuildSection() {
     {
       id: "software",
       title: "Software & AI",
-      icon: <Terminal className="w-10 h-10 text-gray-300" />,
+      icon: <Terminal className="w-10 h-10 text-blue-400" />,
       description: "Developing complex software solutions, from robot control systems using ROS to computer vision models and AI pathfinding algorithms for autonomous navigation.",
       color: "from-white/[0.05] to-transparent",
       borderColor: "border-white/10",
@@ -24,7 +24,7 @@ export function WhatWeBuildSection() {
     {
       id: "electronics",
       title: "Electronics",
-      icon: <Zap className="w-10 h-10 text-gray-300" />,
+      icon: <Zap className="w-10 h-10 text-yellow-400" />,
       description: "Building robust electronic circuits from scratch. This includes power distribution, sensor integration, actuator control, and custom custom PCB layout design.",
       color: "from-white/[0.05] to-transparent",
       borderColor: "border-white/10",
@@ -32,7 +32,7 @@ export function WhatWeBuildSection() {
     {
       id: "mechanics",
       title: "Mechanics",
-      icon: <Wrench className="w-10 h-10 text-gray-300" />,
+      icon: <Wrench className="w-10 h-10 text-orange-400" />,
       description: "Engineering durable structural frameworks. We utilize 3D computer-aided design (CAD), simulation, and fabrication to build chassis, motor mounts, and moving components.",
       color: "from-white/[0.05] to-transparent",
       borderColor: "border-white/10",

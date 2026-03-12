@@ -17,10 +17,10 @@ export default function AdminDashboardPage() {
   };
 
   const statsCards = [
-    { title: "Total Applicants", value: "115", icon: <Users className="text-gray-300 w-6 h-6" />, color: "from-white/[0.05] to-transparent", border: "border-white/10" },
-    { title: "Programming Div", value: MOCK_STATS.totalProgramming, icon: <Code2 className="text-gray-300 w-6 h-6" />, color: "from-white/[0.05] to-transparent", border: "border-white/10" },
-    { title: "Electronic Div", value: MOCK_STATS.totalElectronic, icon: <Cpu className="text-gray-300 w-6 h-6" />, color: "from-white/[0.05] to-transparent", border: "border-white/10" },
-    { title: "Mechanic Div", value: MOCK_STATS.totalMechanic, icon: <Wrench className="text-gray-300 w-6 h-6" />, color: "from-white/[0.05] to-transparent", border: "border-white/10" },
+    { title: "Total Applicants", value: "115", icon: <Users className="text-blue-400 w-6 h-6" />, color: "from-white/[0.05] to-transparent", border: "border-white/10" },
+    { title: "Programming Div", value: MOCK_STATS.totalProgramming, icon: <Code2 className="text-indigo-400 w-6 h-6" />, color: "from-white/[0.05] to-transparent", border: "border-white/10" },
+    { title: "Electronic Div", value: MOCK_STATS.totalElectronic, icon: <Cpu className="text-purple-400 w-6 h-6" />, color: "from-white/[0.05] to-transparent", border: "border-white/10" },
+    { title: "Mechanic Div", value: MOCK_STATS.totalMechanic, icon: <Wrench className="text-orange-400 w-6 h-6" />, color: "from-white/[0.05] to-transparent", border: "border-white/10" },
   ];
 
   return (
@@ -74,7 +74,7 @@ export default function AdminDashboardPage() {
           className="lg:col-span-2 p-6 rounded-2xl glass-card border border-white/10"
         >
           <h2 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
-            <Building2 className="w-5 h-5 text-gray-300" />
+            <Building2 className="w-5 h-5 text-blue-400" />
             Registration Trend (Last 7 Days)
           </h2>
           <div className="h-[300px] w-full">

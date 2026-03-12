@@ -6,17 +6,17 @@ import { Users, Target, Rocket } from "lucide-react";
 export function AboutSection() {
   const cards = [
     {
-      icon: <Users className="w-8 h-8 text-gray-300" />,
+      icon: <Users className="w-8 h-8 text-blue-400" />,
       title: "Our Community",
       description: "A passionate group of students dedicated to pushing the boundaries of robotics and AI at OrionUnhaz.",
     },
     {
-      icon: <Target className="w-8 h-8 text-gray-300" />,
+      icon: <Target className="w-8 h-8 text-purple-400" />,
       title: "Our Mission",
       description: "To foster innovation, provide hands-on engineering experience, and compete at the highest levels of collegiate robotics.",
     },
     {
-      icon: <Rocket className="w-8 h-8 text-gray-300" />,
+      icon: <Rocket className="w-8 h-8 text-orange-400" />,
       title: "Our Vision",
       description: "To be the premier university robotics hub that shapes the next generation of engineers and technologists.",
     }

@@ -21,7 +21,7 @@ export function HeroSection() {
         className="absolute top-[20%] left-[15%] hidden md:flex items-center gap-3 text-sm text-gray-400"
       >
         <div className="w-8 h-8 rounded-full border border-gray-800 glass flex items-center justify-center">
-          <Code className="w-4 h-4 text-gray-400" />
+          <Code className="w-4 h-4 text-blue-400" />
         </div>
         <div>
           <div className="text-white text-xs font-semibold">Programming</div>
@@ -36,7 +36,7 @@ export function HeroSection() {
         className="absolute bottom-[30%] left-[20%] hidden md:flex items-center gap-3 text-sm text-gray-400"
       >
         <div className="w-8 h-8 rounded-full border border-gray-800 glass flex items-center justify-center">
-          <CircuitBoard className="w-4 h-4 text-gray-400" />
+          <CircuitBoard className="w-4 h-4 text-purple-400" />
         </div>
         <div>
           <div className="text-white text-xs font-semibold">Electronics</div>
@@ -51,7 +51,7 @@ export function HeroSection() {
         className="absolute top-[30%] right-[15%] hidden md:flex flex-row-reverse items-center gap-3 text-sm text-gray-400 text-right"
       >
         <div className="w-8 h-8 rounded-full border border-gray-800 glass flex items-center justify-center">
-          <Wrench className="w-4 h-4 text-gray-400" />
+          <Wrench className="w-4 h-4 text-orange-400" />
         </div>
         <div>
           <div className="text-white text-xs font-semibold">Mechanics</div>
@@ -66,7 +66,7 @@ export function HeroSection() {
         className="absolute bottom-[20%] right-[25%] hidden md:flex flex-row-reverse items-center gap-3 text-sm text-gray-400 text-right"
       >
         <div className="w-8 h-8 rounded-full border border-gray-800 glass flex items-center justify-center">
-          <Cpu className="w-4 h-4 text-gray-400" />
+          <Cpu className="w-4 h-4 text-green-400" />
         </div>
         <div>
           <div className="text-white text-xs font-semibold">Embedded</div>

@@ -9,7 +9,7 @@ export function DivisionsSection() {
       id: "programming",
       title: "Programming Division",
       short: "PRG",
-      icon: <Code2 className="w-8 h-8 text-gray-300" />,
+      icon: <Code2 className="w-8 h-8 text-blue-400" />,
       color: "gray",
       focus: ["Algorithms", "ROS/ROS2", "Computer Vision", "App Development"],
       description: "Writing the brain of the robot. From low-level sensor integration to high-level path planning and artificial intelligence models."
@@ -18,7 +18,7 @@ export function DivisionsSection() {
       id: "electronic",
       title: "Electronic Division",
       short: "ELC",
-      icon: <Cpu className="w-8 h-8 text-gray-300" />,
+      icon: <Cpu className="w-8 h-8 text-purple-400" />,
       color: "gray",
       focus: ["PCB Design", "Power Systems", "Sensors", "Microcontrollers"],
       description: "Designing the nervous system. Connecting the logical brain with the physical world through intricate wiring and custom circuit boards."
@@ -27,7 +27,7 @@ export function DivisionsSection() {
       id: "mechanic",
       title: "Mechanic Division",
       short: "MEC",
-      icon: <Wrench className="w-8 h-8 text-gray-300" />,
+      icon: <Wrench className="w-8 h-8 text-orange-400" />,
       color: "gray",
       focus: ["CAD Modeling", "3D Printing", "CNC Machining", "Kinematics"],
       description: "Building the body. Creating structural integrity, precision movement, and robust exterior protection for internal components."

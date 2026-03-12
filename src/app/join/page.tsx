@@ -11,27 +11,27 @@ export default function JoinInfoPage() {
     "Strong passion for robotics, programming, or engineering",
     "Commitment to attend weekly workshops and meetings",
     "Motivation letter explaining why you want to join",
-    "Proof of registration fee payment ($15)"
+    "Proof of registration fee payment (Rp. 35.000)"
   ];
 
   const steps = [
     {
-      icon: <ClipboardList className="w-6 h-6 text-gray-300" />,
+      icon: <ClipboardList className="w-6 h-6 text-blue-400" />,
       title: "1. Fill the Form",
       description: "Submit your personal details, division preference, and motivation letter through our portal.",
     },
     {
-      icon: <ShieldCheck className="w-6 h-6 text-gray-300" />,
+      icon: <ShieldCheck className="w-6 h-6 text-purple-400" />,
       title: "2. Verification",
       description: "Our admin team will review your submitted data and payment proof within 3-5 business days.",
     },
     {
-      icon: <UserCheck className="w-6 h-6 text-gray-300" />,
+      icon: <UserCheck className="w-6 h-6 text-orange-400" />,
       title: "3. Interview",
       description: "Shortlisted candidates will be invited for a brief interview to discuss their motivation and skills.",
     },
     {
-      icon: <CheckCircle2 className="w-6 h-6 text-gray-300" />,
+      icon: <CheckCircle2 className="w-6 h-6 text-green-400" />,
       title: "4. Final Announcement",
 
       description: "Successful applicants will be officially welcomed into the OrionUnhaz family.",

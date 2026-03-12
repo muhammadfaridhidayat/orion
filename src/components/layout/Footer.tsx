@@ -11,10 +11,10 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center gap-2 mb-6">
-              <div className="w-8 h-8 rounded border border-white/20 bg-white/5 flex items-center justify-center">
-                <span className="text-white font-bold text-lg">O</span>
+              <div className="w-8 h-8 rounded-full border border-white/20 bg-white/5 flex items-center justify-center overflow-hidden">
+                <img src="/logo.jpeg" alt="OrionUnhaz Logo" className="w-full h-full object-cover" />
               </div>
-              <span className="text-xl font-bold text-white tracking-tight">OrionUnhaz</span>
+              <span className="text-xl font-bold text-white tracking-tight ml-1">OrionUnhaz</span>
             </div>
             <p className="text-sm leading-relaxed mb-6">
               Pioneering the future of robotics at the university level. We design, build, and program autonomous systems.

@@ -38,10 +38,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           >
             <div className="h-20 flex items-center px-6 border-b border-white/5">
               <Link href="/admin" className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded border border-white/20 bg-white/5 flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">O</span>
+                <div className="w-8 h-8 rounded-full border border-white/20 bg-white/5 flex items-center justify-center overflow-hidden shrink-0">
+                  <img src="/logo.jpeg" alt="OrionUnhaz Logo" className="w-full h-full object-cover" />
                 </div>
-                <span className="text-xl font-bold tracking-tight text-white whitespace-nowrap overflow-hidden">Orion Panel</span>
+                <span className="text-xl font-bold tracking-tight text-white whitespace-nowrap overflow-hidden ml-1">Orion Panel</span>
               </Link>
             </div>
 

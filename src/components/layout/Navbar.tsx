@@ -38,11 +38,11 @@ export function Navbar() {
     >
       <div className="container mx-auto px-4 h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
-          {/* Logo element */}
-          <div className="w-8 h-8 rounded border border-white/20 bg-white/5 flex items-center justify-center">
-            <span className="text-white font-bold text-lg">O</span>
+          {/* Logo container */}
+          <div className="w-8 h-8 rounded-full border border-white/20 bg-white/5 flex items-center justify-center overflow-hidden">
+            <img src="/logo.jpeg" alt="OrionUnhaz Logo" className="w-full h-full object-cover" />
           </div>
-          <span className="text-xl font-bold text-white tracking-tight">OrionUnhaz</span>
+          <span className="text-xl font-bold text-white tracking-tight ml-1">OrionUnhaz</span>
         </Link>
 
         <div className="hidden md:flex items-center gap-8 text-sm font-medium">
