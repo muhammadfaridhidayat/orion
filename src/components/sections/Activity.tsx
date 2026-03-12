@@ -15,7 +15,7 @@ export function ActivitySection() {
     <section className="py-24 relative bg-[#050505] overflow-hidden">
       <div className="container mx-auto px-4 z-10 relative">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -26,11 +26,11 @@ export function ActivitySection() {
               Moments from our workshops, hackathons, and national competitions.
             </p>
           </motion.div>
-          <motion.button 
+          <motion.button
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="px-6 py-2 rounded-full border border-gray-600 glass text-gray-300 hover:text-white transition-colors"
+            className="px-6 py-2 rounded-full border border-white/10 bg-[#050505] text-gray-300 hover:text-white hover:border-white/20 transition-all text-sm"
           >
             Follow our Instagram
           </motion.button>
@@ -38,7 +38,7 @@ export function ActivitySection() {
 
         <div className="grid grid-cols-2 md:grid-cols-4 md:grid-rows-2 gap-4 h-[600px]">
           {images.map((img, i) => (
-            <motion.div 
+            <motion.div
               key={i}
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -47,9 +47,9 @@ export function ActivitySection() {
               className={`relative rounded-2xl overflow-hidden group ${img.span}`}
             >
               {/* Using standard img tags since images might not be configured in Next.js config for next/image */}
-              <img 
-                src={img.src} 
-                alt={img.alt} 
+              <img
+                src={img.src}
+                alt={img.alt}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">

@@ -9,8 +9,8 @@ export function DivisionsSection() {
       id: "programming",
       title: "Programming Division",
       short: "PRG",
-      icon: <Code2 className="w-8 h-8 text-blue-400" />,
-      color: "blue",
+      icon: <Code2 className="w-8 h-8 text-gray-300" />,
+      color: "gray",
       focus: ["Algorithms", "ROS/ROS2", "Computer Vision", "App Development"],
       description: "Writing the brain of the robot. From low-level sensor integration to high-level path planning and artificial intelligence models."
     },
@@ -18,8 +18,8 @@ export function DivisionsSection() {
       id: "electronic",
       title: "Electronic Division",
       short: "ELC",
-      icon: <Cpu className="w-8 h-8 text-purple-400" />,
-      color: "purple",
+      icon: <Cpu className="w-8 h-8 text-gray-300" />,
+      color: "gray",
       focus: ["PCB Design", "Power Systems", "Sensors", "Microcontrollers"],
       description: "Designing the nervous system. Connecting the logical brain with the physical world through intricate wiring and custom circuit boards."
     },
@@ -27,8 +27,8 @@ export function DivisionsSection() {
       id: "mechanic",
       title: "Mechanic Division",
       short: "MEC",
-      icon: <Wrench className="w-8 h-8 text-orange-400" />,
-      color: "orange",
+      icon: <Wrench className="w-8 h-8 text-gray-300" />,
+      color: "gray",
       focus: ["CAD Modeling", "3D Printing", "CNC Machining", "Kinematics"],
       description: "Building the body. Creating structural integrity, precision movement, and robust exterior protection for internal components."
     }
@@ -37,7 +37,7 @@ export function DivisionsSection() {
   return (
     <section className="py-24 relative overflow-hidden bg-[#080808] border-y border-white/5">
       <div className="container mx-auto px-4 relative z-10">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -71,7 +71,7 @@ export function DivisionsSection() {
                     {div.short}
                   </span>
                 </div>
-                
+
                 <h3 className="text-2xl font-bold text-white mb-3">{div.title}</h3>
                 <p className="text-gray-400 mb-8 text-sm leading-relaxed">
                   {div.description}

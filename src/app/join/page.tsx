@@ -16,23 +16,24 @@ export default function JoinInfoPage() {
 
   const steps = [
     {
-      icon: <ClipboardList className="w-6 h-6 text-blue-400" />,
+      icon: <ClipboardList className="w-6 h-6 text-gray-300" />,
       title: "1. Fill the Form",
       description: "Submit your personal details, division preference, and motivation letter through our portal.",
     },
     {
-      icon: <ShieldCheck className="w-6 h-6 text-purple-400" />,
+      icon: <ShieldCheck className="w-6 h-6 text-gray-300" />,
       title: "2. Verification",
       description: "Our admin team will review your submitted data and payment proof within 3-5 business days.",
     },
     {
-      icon: <UserCheck className="w-6 h-6 text-orange-400" />,
+      icon: <UserCheck className="w-6 h-6 text-gray-300" />,
       title: "3. Interview",
       description: "Shortlisted candidates will be invited for a brief interview to discuss their motivation and skills.",
     },
     {
-      icon: <CheckCircle2 className="w-6 h-6 text-green-400" />,
+      icon: <CheckCircle2 className="w-6 h-6 text-gray-300" />,
       title: "4. Final Announcement",
+
       description: "Successful applicants will be officially welcomed into the OrionUnhaz family.",
     }
   ];
@@ -40,19 +41,19 @@ export default function JoinInfoPage() {
   return (
     <main className="min-h-screen bg-[#050505] text-white pt-24 pb-16">
       <Navbar />
-      
+
       {/* Background gradients */}
-      <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/4 left-0 w-[400px] h-[400px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-white/[0.03] rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-1/4 left-0 w-[400px] h-[400px] bg-emerald-100/[0.02] rounded-full blur-[120px] pointer-events-none" />
 
       <div className="container mx-auto px-4 relative z-10 max-w-5xl">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="text-blue-500 font-mono tracking-wider text-sm mb-4 block">/// JOIN THE CREW</span>
+          <span className="text-gray-400 font-mono tracking-wider text-sm mb-4 block">/// JOIN THE CREW</span>
           <h1 className="text-4xl md:text-6xl font-bold mb-6 glow-text">Become a Member</h1>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
             Ready to build the future? Review the requirements and recruitment process below before submitting your application.
@@ -60,27 +61,27 @@ export default function JoinInfoPage() {
         </motion.div>
 
         <div className="grid md:grid-cols-5 gap-8 mb-16">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="md:col-span-2 glass-card p-8 rounded-3xl h-fit border border-white/10"
           >
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
-              <span className="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-sm">!</span>
+              <span className="w-8 h-8 rounded-full bg-white/10 text-white flex items-center justify-center text-sm">!</span>
               Requirements
             </h2>
             <ul className="space-y-4">
               {requirements.map((req, i) => (
                 <li key={i} className="flex items-start gap-3 text-gray-300 relative group">
-                  <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 shrink-0 group-hover:scale-150 transition-transform" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-gray-400 mt-2 shrink-0 group-hover:scale-150 transition-transform" />
                   <span className="leading-relaxed">{req}</span>
                 </li>
               ))}
             </ul>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
@@ -103,7 +104,7 @@ export default function JoinInfoPage() {
           </motion.div>
         </div>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
@@ -113,8 +114,8 @@ export default function JoinInfoPage() {
             <CheckCircle2 className="w-5 h-5 text-green-500" />
             I have read and understood the requirements and process.
           </p>
-          <Link 
-            href="/register" 
+          <Link
+            href="/register"
             className="group relative px-10 py-4 rounded-full bg-white text-black font-bold text-lg overflow-hidden transition-transform hover:scale-105 active:scale-95 flex items-center gap-2"
           >
             <span className="relative z-10 flex items-center justify-center gap-2">

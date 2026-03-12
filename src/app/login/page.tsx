@@ -22,7 +22,7 @@ export default function LoginPage() {
   return (
     <main className="min-h-screen bg-[#050505] flex items-center justify-center relative overflow-hidden">
       {/* Background styling for login page */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-900/10 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-white/[0.03] rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute inset-0 bg-grid opacity-[0.02] pointer-events-none" />
 
       <motion.div
@@ -35,7 +35,7 @@ export default function LoginPage() {
           ← Back to Home
         </Link>
         <div className="flex flex-col items-center mb-10">
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center mb-6 shadow-lg shadow-blue-500/20">
+          <div className="w-16 h-16 rounded-2xl border border-white/10 bg-white/5 flex items-center justify-center mb-6 shadow-lg shadow-black/50">
             <Lock className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">Admin Portal</h1>
@@ -45,9 +45,9 @@ export default function LoginPage() {
         </div>
 
         {error && (
-          <motion.div 
-            initial={{ opacity: 0, y: -10 }} 
-            animate={{ opacity: 1, y: 0 }} 
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
             className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center gap-3 text-red-400 text-sm"
           >
             <ShieldAlert className="w-5 h-5" />
@@ -85,7 +85,7 @@ export default function LoginPage() {
                   setError(false);
                 }}
                 placeholder="Enter password"
-                className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-11 pr-4 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
+                className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-11 pr-4 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400/50 transition-all"
                 required
               />
             </div>
@@ -93,7 +93,7 @@ export default function LoginPage() {
 
           <button
             type="submit"
-            className="w-full py-3.5 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold hover:from-blue-600 hover:to-purple-600 focus:ring-2 focus:ring-blue-500/50 transition-all flex items-center justify-center gap-2 group"
+            className="w-full py-3.5 rounded-xl bg-white text-black font-semibold hover:bg-gray-200 focus:ring-2 focus:ring-gray-400/50 transition-all flex items-center justify-center gap-2 group"
           >
             Sign In to Dashboard
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

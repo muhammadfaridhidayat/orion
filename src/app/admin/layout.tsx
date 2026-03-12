@@ -25,8 +25,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   return (
     <div className="min-h-screen bg-[#000000] text-gray-200 flex overflow-hidden selection:bg-blue-500/30">
       {/* Sidebar background gradient */}
-      <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-blue-900/10 rounded-full blur-[100px] pointer-events-none" />
-      
+      <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-white/[0.03] rounded-full blur-[100px] pointer-events-none" />
+
       {/* Sidebar */}
       <AnimatePresence initial={false}>
         {sidebarOpen && (
@@ -38,21 +38,21 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           >
             <div className="h-20 flex items-center px-6 border-b border-white/5">
               <Link href="/admin" className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center">
+                <div className="w-8 h-8 rounded border border-white/20 bg-white/5 flex items-center justify-center">
                   <span className="text-white font-bold text-lg">O</span>
                 </div>
                 <span className="text-xl font-bold tracking-tight text-white whitespace-nowrap overflow-hidden">Orion Panel</span>
               </Link>
             </div>
-            
+
             <div className="flex-1 py-8 px-4 space-y-2 overflow-y-auto w-full">
               <p className="px-4 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4 whitespace-nowrap overflow-hidden">Overview</p>
-              
-              <Link href="/admin" className="flex items-center gap-3 px-4 py-3 rounded-xl bg-blue-500/10 text-blue-400 font-medium whitespace-nowrap">
+
+              <Link href="/admin" className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/10 text-white font-medium whitespace-nowrap">
                 <LayoutDashboard className="w-5 h-5 shrink-0" />
                 <span>Dashboard</span>
               </Link>
-              
+
               <Link href="#" className="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-white/5 hover:text-white transition-colors whitespace-nowrap">
                 <Users className="w-5 h-5 shrink-0" />
                 <span>Applicants</span>
@@ -67,7 +67,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             </div>
 
             <div className="p-4 border-t border-white/5 w-full">
-              <button 
+              <button
                 onClick={logout}
                 className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-red-500/80 hover:bg-red-500/10 hover:text-red-500 transition-colors whitespace-nowrap"
               >
@@ -84,7 +84,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         {/* Topbar */}
         <header className="h-20 bg-[#0a0a0a]/50 backdrop-blur-md border-b border-white/5 flex items-center justify-between px-8 sticky top-0 z-30">
           <div className="flex items-center gap-4">
-            <button 
+            <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
               className="p-2 -ml-2 rounded-lg text-gray-400 hover:bg-white/5 transition-colors"
             >
@@ -92,10 +92,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             </button>
             <div className="relative hidden md:block">
               <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
-              <input 
-                type="text" 
-                placeholder="Search applicants..." 
-                className="bg-black/50 border border-white/10 rounded-full py-2 pl-10 pr-4 text-sm focus:outline-none focus:border-blue-500/50 w-64 text-white"
+              <input
+                type="text"
+                placeholder="Search applicants..."
+                className="bg-black/50 border border-white/10 rounded-full py-2 pl-10 pr-4 text-sm focus:outline-none focus:border-gray-400/50 w-64 text-white"
               />
             </div>
           </div>
@@ -105,7 +105,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <Bell className="w-5 h-5 text-gray-400" />
               <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-blue-500 rounded-full" />
             </button>
-            <div className="h-8 w-8 rounded-full bg-gradient-to-tr from-blue-600 to-purple-600 border border-white/10" />
+            <div className="h-8 w-8 rounded-full bg-gradient-to-tr from-gray-600 to-gray-400 border border-white/10" />
           </div>
         </header>
 

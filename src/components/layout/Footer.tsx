@@ -6,12 +6,12 @@ import { Github, Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 export function Footer() {
   return (
     <footer className="bg-black text-gray-400 py-16 border-t border-white/10 relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-900/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-white/[0.02] rounded-full blur-[120px] pointer-events-none" />
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center gap-2 mb-6">
-              <div className="w-8 h-8 rounded bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center">
+              <div className="w-8 h-8 rounded border border-white/20 bg-white/5 flex items-center justify-center">
                 <span className="text-white font-bold text-lg">O</span>
               </div>
               <span className="text-xl font-bold text-white tracking-tight">OrionUnhaz</span>
@@ -35,9 +35,9 @@ export function Footer() {
           <div>
             <h4 className="text-white font-semibold mb-6">Divisions</h4>
             <ul className="space-y-3 text-sm">
-              <li><a href="#" className="hover:text-blue-400 transition-colors">Programming</a></li>
-              <li><a href="#" className="hover:text-purple-400 transition-colors">Electronic</a></li>
-              <li><a href="#" className="hover:text-orange-400 transition-colors">Mechanic</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Programming</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Electronic</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Mechanic</a></li>
             </ul>
           </div>
 

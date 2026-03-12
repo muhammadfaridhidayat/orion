@@ -11,16 +11,16 @@ export default function AdminDashboardPage() {
   const [regOpen, setRegOpen] = useState(true);
 
   const handleStatusChange = (id: string, newStatus: "Verified" | "Rejected") => {
-    setApplicants(applicants.map(app => 
+    setApplicants(applicants.map(app =>
       app.id === id ? { ...app, status: newStatus } : app
     ));
   };
 
   const statsCards = [
-    { title: "Total Applicants", value: "115", icon: <Users className="text-blue-400 w-6 h-6" />, color: "from-blue-500/20 to-transparent", border: "border-blue-500/20" },
-    { title: "Programming Div", value: MOCK_STATS.totalProgramming, icon: <Code2 className="text-indigo-400 w-6 h-6" />, color: "from-indigo-500/20 to-transparent", border: "border-indigo-500/20" },
-    { title: "Electronic Div", value: MOCK_STATS.totalElectronic, icon: <Cpu className="text-purple-400 w-6 h-6" />, color: "from-purple-500/20 to-transparent", border: "border-purple-500/20" },
-    { title: "Mechanic Div", value: MOCK_STATS.totalMechanic, icon: <Wrench className="text-orange-400 w-6 h-6" />, color: "from-orange-500/20 to-transparent", border: "border-orange-500/20" },
+    { title: "Total Applicants", value: "115", icon: <Users className="text-gray-300 w-6 h-6" />, color: "from-white/[0.05] to-transparent", border: "border-white/10" },
+    { title: "Programming Div", value: MOCK_STATS.totalProgramming, icon: <Code2 className="text-gray-300 w-6 h-6" />, color: "from-white/[0.05] to-transparent", border: "border-white/10" },
+    { title: "Electronic Div", value: MOCK_STATS.totalElectronic, icon: <Cpu className="text-gray-300 w-6 h-6" />, color: "from-white/[0.05] to-transparent", border: "border-white/10" },
+    { title: "Mechanic Div", value: MOCK_STATS.totalMechanic, icon: <Wrench className="text-gray-300 w-6 h-6" />, color: "from-white/[0.05] to-transparent", border: "border-white/10" },
   ];
 
   return (
@@ -30,10 +30,10 @@ export default function AdminDashboardPage() {
           <h1 className="text-3xl font-bold text-white tracking-tight">Dashboard Overview</h1>
           <p className="text-gray-400 text-sm mt-1">Welcome back. Here is the latest registration data.</p>
         </div>
-        
+
         <div className="flex items-center gap-4 p-2 rounded-xl bg-white/5 border border-white/10">
           <span className="text-sm font-medium text-gray-300 pl-2">Registration Status:</span>
-          <button 
+          <button
             onClick={() => setRegOpen(!regOpen)}
             className={`relative inline-flex h-7 w-14 shrink-0 cursor-pointer items-center justify-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500/50 ${regOpen ? 'bg-green-500' : 'bg-gray-600'}`}
           >
@@ -48,7 +48,7 @@ export default function AdminDashboardPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {statsCards.map((stat, i) => (
-          <motion.div 
+          <motion.div
             key={i}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -67,14 +67,14 @@ export default function AdminDashboardPage() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
           className="lg:col-span-2 p-6 rounded-2xl glass-card border border-white/10"
         >
           <h2 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
-            <Building2 className="w-5 h-5 text-blue-400" />
+            <Building2 className="w-5 h-5 text-gray-300" />
             Registration Trend (Last 7 Days)
           </h2>
           <div className="h-[300px] w-full">
@@ -82,34 +82,34 @@ export default function AdminDashboardPage() {
               <AreaChart data={CHART_DATA} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                 <defs>
                   <linearGradient id="colorPrg" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#818cf8" stopOpacity={0.3}/>
-                    <stop offset="95%" stopColor="#818cf8" stopOpacity={0}/>
+                    <stop offset="5%" stopColor="#d4d4d8" stopOpacity={0.3} />
+                    <stop offset="95%" stopColor="#d4d4d8" stopOpacity={0} />
                   </linearGradient>
                   <linearGradient id="colorElc" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#c084fc" stopOpacity={0.3}/>
-                    <stop offset="95%" stopColor="#c084fc" stopOpacity={0}/>
+                    <stop offset="5%" stopColor="#a1a1aa" stopOpacity={0.3} />
+                    <stop offset="95%" stopColor="#a1a1aa" stopOpacity={0} />
                   </linearGradient>
                   <linearGradient id="colorMec" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#fb923c" stopOpacity={0.3}/>
-                    <stop offset="95%" stopColor="#fb923c" stopOpacity={0}/>
+                    <stop offset="5%" stopColor="#71717a" stopOpacity={0.3} />
+                    <stop offset="95%" stopColor="#71717a" stopOpacity={0} />
                   </linearGradient>
                 </defs>
                 <XAxis dataKey="day" stroke="#525252" fontSize={12} tickLine={false} axisLine={false} />
                 <YAxis stroke="#525252" fontSize={12} tickLine={false} axisLine={false} />
                 <CartesianGrid strokeDasharray="3 3" stroke="#262626" vertical={false} />
-                <Tooltip 
+                <Tooltip
                   contentStyle={{ backgroundColor: '#0a0a0a', borderColor: '#262626', borderRadius: '12px', color: '#fff' }}
                   itemStyle={{ color: '#e5e5e5' }}
                 />
-                <Area type="monotone" dataKey="programming" stroke="#818cf8" strokeWidth={2} fillOpacity={1} fill="url(#colorPrg)" />
-                <Area type="monotone" dataKey="electronic" stroke="#c084fc" strokeWidth={2} fillOpacity={1} fill="url(#colorElc)" />
-                <Area type="monotone" dataKey="mechanic" stroke="#fb923c" strokeWidth={2} fillOpacity={1} fill="url(#colorMec)" />
+                <Area type="monotone" dataKey="programming" stroke="#d4d4d8" strokeWidth={2} fillOpacity={1} fill="url(#colorPrg)" />
+                <Area type="monotone" dataKey="electronic" stroke="#a1a1aa" strokeWidth={2} fillOpacity={1} fill="url(#colorElc)" />
+                <Area type="monotone" dataKey="mechanic" stroke="#71717a" strokeWidth={2} fillOpacity={1} fill="url(#colorMec)" />
               </AreaChart>
             </ResponsiveContainer>
           </div>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
@@ -119,7 +119,7 @@ export default function AdminDashboardPage() {
           <div className="space-y-6">
             {[1, 2, 3, 4, 5].map((_, idx) => (
               <div key={idx} className="flex items-start gap-4">
-                <div className="w-2 h-2 mt-2 rounded-full bg-blue-500 shrink-0" />
+                <div className="w-2 h-2 mt-2 rounded-full bg-gray-400 shrink-0" />
                 <div>
                   <p className="text-sm font-medium text-white mb-1">New Application Received</p>
                   <p className="text-xs text-gray-500">{Math.floor(Math.random() * 60)} minutes ago • Programming</p>
@@ -130,7 +130,7 @@ export default function AdminDashboardPage() {
         </motion.div>
       </div>
 
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.6 }}
@@ -138,9 +138,9 @@ export default function AdminDashboardPage() {
       >
         <div className="p-6 border-b border-white/5 flex justify-between items-center">
           <h2 className="text-xl font-bold text-white">Recent Applicants</h2>
-          <button className="text-sm text-blue-400 hover:text-blue-300 font-medium transition-colors">View All</button>
+          <button className="text-sm text-gray-400 hover:text-white font-medium transition-colors">View All</button>
         </div>
-        
+
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
@@ -168,11 +168,7 @@ export default function AdminDashboardPage() {
                     </div>
                   </td>
                   <td className="p-4">
-                    <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium border
-                      ${app.division === 'Programming' ? 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20' : ''}
-                      ${app.division === 'Electronic' ? 'bg-purple-500/10 text-purple-400 border-purple-500/20' : ''}
-                      ${app.division === 'Mechanic' ? 'bg-orange-500/10 text-orange-400 border-orange-500/20' : ''}
-                    `}>
+                    <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium border bg-white/5 text-gray-300 border-white/10`}>
                       {app.division}
                     </span>
                   </td>
@@ -192,14 +188,14 @@ export default function AdminDashboardPage() {
                     <div className="flex items-center justify-end gap-2">
                       {app.status === 'Pending' && (
                         <>
-                          <button 
+                          <button
                             onClick={() => handleStatusChange(app.id, 'Verified')}
                             className="p-1.5 rounded-lg bg-green-500/10 text-green-400 hover:bg-green-500/20 transition-colors"
                             title="Verify"
                           >
                             <Check className="w-4 h-4" />
                           </button>
-                          <button 
+                          <button
                             onClick={() => handleStatusChange(app.id, 'Rejected')}
                             className="p-1.5 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 transition-colors"
                             title="Reject"

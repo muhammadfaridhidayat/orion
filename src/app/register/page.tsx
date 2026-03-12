@@ -20,11 +20,11 @@ export default function RegisterPage() {
     e.preventDefault();
     // In a real app, this would be an API call
     console.log("Mock submission:", formData);
-    
+
     // Simulate API delay
     const btn = document.getElementById("submitBtn");
-    if(btn) btn.innerHTML = '<span class="animate-pulse">Submitting...</span>';
-    
+    if (btn) btn.innerHTML = '<span class="animate-pulse">Submitting...</span>';
+
     setTimeout(() => {
       setSubmitted(true);
     }, 1500);
@@ -34,14 +34,14 @@ export default function RegisterPage() {
     return (
       <main className="min-h-screen bg-[#050505] text-white pt-24 pb-16 flex items-center justify-center">
         <Navbar />
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="max-w-md w-full glass-card p-10 rounded-3xl border border-green-500/30 text-center relative overflow-hidden"
+          className="max-w-md w-full glass-card p-10 rounded-3xl border border-white/10 text-center relative overflow-hidden"
         >
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-emerald-600" />
-          <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
-            <CheckCircle2 className="w-10 h-10 text-green-400" />
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-gray-500 to-white" />
+          <div className="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-6">
+            <CheckCircle2 className="w-10 h-10 text-white" />
           </div>
           <h2 className="text-3xl font-bold mb-4">Application Received!</h2>
           <p className="text-gray-400 mb-8">
@@ -58,9 +58,9 @@ export default function RegisterPage() {
   return (
     <main className="min-h-screen bg-[#050505] text-white pt-32 pb-16">
       <Navbar />
-      
+
       <div className="container mx-auto px-4 max-w-3xl relative z-10">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="mb-10 text-center"
@@ -69,7 +69,7 @@ export default function RegisterPage() {
           <p className="text-gray-400">Please fill out all fields accurately.</p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
@@ -83,8 +83,8 @@ export default function RegisterPage() {
                   type="text"
                   required
                   value={formData.fullName}
-                  onChange={(e) => setFormData({...formData, fullName: e.target.value})}
-                  className="w-full bg-black/50 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-gray-600 focus:outline-none focus:border-blue-500/50 transition-colors"
+                  onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                  className="w-full bg-black/50 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-gray-600 focus:outline-none focus:border-gray-400/50 transition-colors"
                   placeholder="John Doe"
                 />
               </div>
@@ -94,8 +94,8 @@ export default function RegisterPage() {
                   type="text"
                   required
                   value={formData.nim}
-                  onChange={(e) => setFormData({...formData, nim: e.target.value})}
-                  className="w-full bg-black/50 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-gray-600 focus:outline-none focus:border-blue-500/50 transition-colors"
+                  onChange={(e) => setFormData({ ...formData, nim: e.target.value })}
+                  className="w-full bg-black/50 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-gray-600 focus:outline-none focus:border-gray-400/50 transition-colors"
                   placeholder="H071231011"
                 />
               </div>
@@ -107,8 +107,8 @@ export default function RegisterPage() {
                 <select
                   required
                   value={formData.semester}
-                  onChange={(e) => setFormData({...formData, semester: e.target.value})}
-                  className="w-full bg-black/50 border border-white/10 rounded-xl py-3 px-4 text-white focus:outline-none focus:border-blue-500/50 transition-colors appearance-none"
+                  onChange={(e) => setFormData({ ...formData, semester: e.target.value })}
+                  className="w-full bg-black/50 border border-white/10 rounded-xl py-3 px-4 text-white focus:outline-none focus:border-gray-400/50 transition-colors appearance-none"
                 >
                   <option value="" disabled hidden>Select Semester</option>
                   {[1, 2, 3, 4, 5, 6, 7].map(sem => (
@@ -121,8 +121,8 @@ export default function RegisterPage() {
                 <select
                   required
                   value={formData.division}
-                  onChange={(e) => setFormData({...formData, division: e.target.value})}
-                  className="w-full bg-black/50 border border-white/10 rounded-xl py-3 px-4 text-white focus:outline-none focus:border-blue-500/50 transition-colors appearance-none"
+                  onChange={(e) => setFormData({ ...formData, division: e.target.value })}
+                  className="w-full bg-black/50 border border-white/10 rounded-xl py-3 px-4 text-white focus:outline-none focus:border-gray-400/50 transition-colors appearance-none"
                 >
                   <option value="Programming" className="bg-[#0f0f0f]">Programming Division</option>
                   <option value="Electronic" className="bg-[#0f0f0f]">Electronic Division</option>
@@ -137,8 +137,8 @@ export default function RegisterPage() {
                 required
                 rows={4}
                 value={formData.motivation}
-                onChange={(e) => setFormData({...formData, motivation: e.target.value})}
-                className="w-full bg-black/50 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-gray-600 focus:outline-none focus:border-blue-500/50 transition-colors resize-none"
+                onChange={(e) => setFormData({ ...formData, motivation: e.target.value })}
+                className="w-full bg-black/50 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-gray-600 focus:outline-none focus:border-gray-400/50 transition-colors resize-none"
                 placeholder="Why do you want to join OrionUnhaz and this specific division?"
               />
             </div>
@@ -147,7 +147,7 @@ export default function RegisterPage() {
               <label className="block text-sm font-medium text-gray-300 mb-2">Payment Proof (PDF/JPG/PNG)</label>
               <div className="w-full border-2 border-dashed border-white/10 rounded-xl p-8 hover:bg-white/5 hover:border-white/20 transition-colors cursor-pointer flex flex-col items-center justify-center text-gray-400 group relative">
                 <input type="file" className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" required />
-                <UploadCloud className="w-8 h-8 mb-3 group-hover:text-blue-400 transition-colors" />
+                <UploadCloud className="w-8 h-8 mb-3 group-hover:text-white transition-colors" />
                 <span className="text-sm">Click to upload or drag and drop</span>
                 <span className="text-xs text-gray-600 mt-1">Max file size: 5MB</span>
               </div>
