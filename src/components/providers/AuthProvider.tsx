@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 type AuthContextType = {
   isAdmin: boolean;
-  login: (password: string) => boolean;
+  login: (email: string, password: string) => Promise<boolean>;
   logout: () => void;
 };
 
@@ -16,27 +16,55 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const router = useRouter();
 
   useEffect(() => {
-    // Check local storage for mock auth state on mount
-    const savedAuth = localStorage.getItem("orion_admin_auth");
-    if (savedAuth === "true") {
+    // Check local storage for auth token on mount
+    const savedToken = localStorage.getItem("orion_admin_token");
+    if (savedToken) {
       setIsAdmin(true);
     }
   }, []);
 
-  const login = (password: string) => {
-    // Dummy authentication: password is 'admin123'
-    if (password === "admin123") {
-      setIsAdmin(true);
-      localStorage.setItem("orion_admin_auth", "true");
-      router.push("/admin");
-      return true;
+  // const login = (password: string) => {
+  //   // Dummy authentication: password is 'admin123'
+  //   if (password === "admin123") {
+  //     setIsAdmin(true);
+  //     localStorage.setItem("orion_admin_auth", "true");
+  //     router.push("/admin");
+  //     return true;
+  //   }
+  //   return false;
+  // };
+
+  // --- BACKEND INTEGRATION POINT: ADMIN LOGIN ---
+  // Example implementation using standard fetch:
+  const login = async (email: string, password: string) => {
+    try {
+      const response = await fetch('http://localhost:8080/api/v1/user/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+
+      // Parse JSON even if response is 401/400 to get error messages
+      const result = await response.json().catch(() => ({}));
+      
+      if (response.ok && result.success && result.data && result.data.token) {
+        localStorage.setItem("orion_admin_token", result.data.token);
+        setIsAdmin(true);
+        router.push("/admin");
+        return true;
+      }
+      
+      console.warn("Login failed:", result.message || "Invalid credentials");
+      return false;
+    } catch (error) {
+      console.warn("Network error during login:", error);
+      return false;
     }
-    return false;
   };
 
   const logout = () => {
     setIsAdmin(false);
-    localStorage.removeItem("orion_admin_auth");
+    localStorage.removeItem("orion_admin_token");
     router.push("/login");
   };
 
