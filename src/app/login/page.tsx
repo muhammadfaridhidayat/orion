@@ -7,13 +7,14 @@ import { Lock, User, ArrowRight, ShieldAlert } from "lucide-react";
 import Link from "next/link";
 
 export default function LoginPage() {
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const { login } = useAuth();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    const success = login(password);
+    const success = await login(email, password);
     if (!success) {
       setError(true);
     }
@@ -51,22 +52,27 @@ export default function LoginPage() {
             className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center gap-3 text-red-400 text-sm"
           >
             <ShieldAlert className="w-5 h-5" />
-            Invalid credentials. Hint: use &apos;admin123&apos;
+            Invalid email or password.
           </motion.div>
         )}
 
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">Username</label>
+            <label className="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                 <User className="h-5 w-5 text-gray-500" />
               </div>
               <input
-                type="text"
-                disabled
-                value="admin"
-                className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-11 pr-4 text-gray-500 cursor-not-allowed focus:outline-none"
+                type="email"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setError(false);
+                }}
+                placeholder="admin@mail.com"
+                className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-11 pr-4 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400/50 transition-all"
+                required
               />
             </div>
           </div>
