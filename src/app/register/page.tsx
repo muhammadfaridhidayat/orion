@@ -11,23 +11,70 @@ export default function RegisterPage() {
   const [formData, setFormData] = useState({
     fullName: "",
     nim: "",
+    phoneNumber: "",
     semester: "",
-    division: "Programming",
+    division: "",
     motivation: "",
   });
+  const [paymentProof, setPaymentProof] = useState<File | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, this would be an API call
-    console.log("Mock submission:", formData);
+    setIsLoading(true);
+    setErrorMsg("");
 
-    // Simulate API delay
-    const btn = document.getElementById("submitBtn");
-    if (btn) btn.innerHTML = '<span class="animate-pulse">Submitting...</span>';
+    if (!paymentProof) {
+      setErrorMsg("Please upload your payment proof.");
+      setIsLoading(false);
+      return;
+    }
 
-    setTimeout(() => {
+    try {
+      const submitData = new FormData();
+      submitData.append("full_name", formData.fullName);
+      submitData.append("nim", formData.nim);
+      submitData.append("phone_number", formData.phoneNumber);
+      submitData.append("semester", formData.semester);
+      submitData.append("devision", formData.division);
+      submitData.append("motivation", formData.motivation);
+
+      submitData.append("payment", paymentProof);
+
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
+      const response = await fetch(`${apiUrl}/api/v1/member/register`, {
+        method: "POST",
+        body: submitData,
+      });
+
+      if (!response.ok) {
+        const errData = await response.json().catch(() => ({}));
+
+        // Check entire response for duplicate NIM error
+        // const rawError = JSON.stringify(errData);
+        // if (rawError.includes("duplicate key") || rawError.includes("unique constraint") || rawError.includes("idx_new_members_nim")) {
+        //   setErrorMsg("This NIM (Student ID) is already registered.");
+        //   return;
+        // }
+
+        let errorMessage = errData.message || "Registration failed. Please try again.";
+        if (errData.errors) {
+          const details = Object.values(errData.errors).join(", ");
+          if (details) {
+            errorMessage += ` (${details})`;
+          }
+        }
+        throw new Error(errorMessage);
+      }
+
       setSubmitted(true);
-    }, 1500);
+    } catch (error: any) {
+      console.error("Submission error:", error);
+      setErrorMsg(error.message || "An unexpected error occurred.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   if (submitted) {
@@ -75,6 +122,11 @@ export default function RegisterPage() {
           transition={{ delay: 0.1 }}
           className="glass-card rounded-3xl p-6 md:p-10 border border-white/10 relative"
         >
+          {errorMsg && (
+            <div className="mb-6 p-4 bg-red-500/10 border border-red-500/50 rounded-xl text-red-400 text-sm text-center">
+              {errorMsg}
+            </div>
+          )}
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid md:grid-cols-2 gap-6">
               <div>
@@ -96,9 +148,21 @@ export default function RegisterPage() {
                   value={formData.nim}
                   onChange={(e) => setFormData({ ...formData, nim: e.target.value })}
                   className="w-full bg-black/50 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-gray-600 focus:outline-none focus:border-gray-400/50 transition-colors"
-                  placeholder="H071231011"
+                  placeholder="220603920"
                 />
               </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-300 mb-2">Phone Number</label>
+              <input
+                type="tel"
+                required
+                value={formData.phoneNumber}
+                onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
+                className="w-full bg-black/50 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-gray-600 focus:outline-none focus:border-gray-400/50 transition-colors"
+                placeholder="0879999999"
+              />
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
@@ -124,9 +188,10 @@ export default function RegisterPage() {
                   onChange={(e) => setFormData({ ...formData, division: e.target.value })}
                   className="w-full bg-black/50 border border-white/10 rounded-xl py-3 px-4 text-white focus:outline-none focus:border-gray-400/50 transition-colors appearance-none"
                 >
-                  <option value="Programming" className="bg-[#0f0f0f]">Programming Division</option>
-                  <option value="Electronic" className="bg-[#0f0f0f]">Electronic Division</option>
-                  <option value="Mechanic" className="bg-[#0f0f0f]">Mechanic Division</option>
+                  <option value="" disabled hidden>Select Division</option>
+                  <option value="Programming" className="bg-[#0f0f0f]">Programming</option>
+                  <option value="Electronic" className="bg-[#0f0f0f]">Electronic</option>
+                  <option value="Mechanic" className="bg-[#0f0f0f]">Mechanic</option>
                 </select>
               </div>
             </div>
@@ -146,10 +211,18 @@ export default function RegisterPage() {
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-2">Payment Proof (PDF/JPG/PNG)</label>
               <div className="w-full border-2 border-dashed border-white/10 rounded-xl p-8 hover:bg-white/5 hover:border-white/20 transition-colors cursor-pointer flex flex-col items-center justify-center text-gray-400 group relative">
-                <input type="file" className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" required />
+                <input
+                  type="file"
+                  accept=".pdf,.jpg,.jpeg,.png"
+                  onChange={(e) => setPaymentProof(e.target.files?.[0] || null)}
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                  required
+                />
                 <UploadCloud className="w-8 h-8 mb-3 group-hover:text-blue-400 transition-colors" />
-                <span className="text-sm">Click to upload or drag and drop</span>
-                <span className="text-xs text-gray-600 mt-1">Max file size: 5MB</span>
+                <span className="text-sm">
+                  {paymentProof ? paymentProof.name : "Click to upload or drag and drop"}
+                </span>
+                {!paymentProof && <span className="text-xs text-gray-600 mt-1">Max file size: 5MB</span>}
               </div>
             </div>
 
@@ -157,9 +230,16 @@ export default function RegisterPage() {
               <button
                 id="submitBtn"
                 type="submit"
-                className="w-full py-4 rounded-xl bg-white text-black font-bold hover:bg-gray-200 focus:ring-4 focus:ring-white/20 transition-all flex items-center justify-center gap-2 group"
+                disabled={isLoading}
+                className="w-full py-4 rounded-xl bg-white text-black font-bold hover:bg-gray-200 focus:ring-4 focus:ring-white/20 transition-all flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Submit Application <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                {isLoading ? (
+                  <span className="animate-pulse">Submitting...</span>
+                ) : (
+                  <>
+                    Submit Application <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </>
+                )}
               </button>
             </div>
           </form>
