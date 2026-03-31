@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { UploadCloud, CheckCircle2, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
@@ -19,6 +19,24 @@ export default function RegisterPage() {
   const [paymentProof, setPaymentProof] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [isRegistrationOpen, setIsRegistrationOpen] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const checkRegistrationStatus = async () => {
+      try {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
+        const res = await fetch(`${apiUrl}/api/v1/batch/active`);
+        if (res.ok) {
+          setIsRegistrationOpen(true);
+        } else {
+          setIsRegistrationOpen(false);
+        }
+      } catch (err) {
+        setIsRegistrationOpen(false);
+      }
+    };
+    checkRegistrationStatus();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -76,6 +94,47 @@ export default function RegisterPage() {
       setIsLoading(false);
     }
   };
+
+  if (isRegistrationOpen === null) {
+    return (
+      <main className="min-h-screen bg-[#050505] text-white pt-32 pb-16 flex items-center justify-center">
+        <Navbar />
+        <div className="animate-pulse flex flex-col items-center">
+          <div className="w-12 h-12 border-4 border-white/20 border-t-white rounded-full animate-spin mb-4" />
+          <p className="text-gray-400">Loading registration status...</p>
+        </div>
+      </main>
+    );
+  }
+
+  if (isRegistrationOpen === false) {
+    return (
+      <main className="min-h-screen bg-[#050505] text-white pt-32 pb-16 flex items-center justify-center">
+        <Navbar />
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="max-w-md w-full glass-card p-10 rounded-3xl border border-red-500/20 text-center relative overflow-hidden bg-[#0A0A0A]"
+          >
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-600 to-red-400" />
+            <div className="w-20 h-20 bg-red-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg className="w-10 h-10 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+            </div>
+            <h2 className="text-2xl font-bold mb-4">Masa pendaftaran sudah habis.</h2>
+            <p className="text-gray-400 mb-8">
+              Pendaftaran anggota baru saat ini sedang ditutup atau belum ada gelombang pendaftaran yang aktif.
+            </p>
+            <Link href="/" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black hover:bg-gray-200 transition-colors font-bold w-full justify-center">
+              Kembali ke Beranda
+            </Link>
+          </motion.div>
+        </div>
+      </main>
+    );
+  }
 
   if (submitted) {
     return (
@@ -189,9 +248,9 @@ export default function RegisterPage() {
                   className="w-full bg-black/50 border border-white/10 rounded-xl py-3 px-4 text-white focus:outline-none focus:border-gray-400/50 transition-colors appearance-none"
                 >
                   <option value="" disabled hidden>Select Division</option>
-                  <option value="Programming" className="bg-[#0f0f0f]">Programming</option>
-                  <option value="Electronic" className="bg-[#0f0f0f]">Electronic</option>
-                  <option value="Mechanic" className="bg-[#0f0f0f]">Mechanic</option>
+                  <option value="PROGRAMMING" className="bg-[#0f0f0f]">Programming</option>
+                  <option value="ELECTRONICS" className="bg-[#0f0f0f]">Electronic</option>
+                  <option value="MECHANICAL" className="bg-[#0f0f0f]">Mechanic</option>
                 </select>
               </div>
             </div>

@@ -1,4 +1,4 @@
-export type Devision = "PROGRAMMING" | "ELECTRONIC" | "MECHANIC";
+export type Devision = "PROGRAMMING" | "ELECTRONICS" | "MECHANICAL";
 
 export type Status = "PENDING" | "VERIFIED" | "REJECTED";
 
@@ -86,7 +86,7 @@ export const updateBatch = async (id: number, data: Partial<Batch>) => {
 
 export const setActiveBatch = async (id: number, isActive: boolean) => {
   const res = await fetch(`${API_URL}/api/v1/batch/${id}/active`, {
-    method: "PATCH",
+    method: "PUT",
     headers: getAuthHeaders(),
     credentials: "include",
     body: JSON.stringify({ is_active: isActive }),
@@ -114,7 +114,7 @@ export const getMembers = async (page = 1, limit = 10, query = "") => {
 
 export const updateMemberStatus = async (id: number, status: Status) => {
   const res = await fetch(`${API_URL}/api/v1/member/${id}/status`, {
-    method: "PATCH",
+    method: "PUT",
     headers: getAuthHeaders(),
     credentials: "include",
     body: JSON.stringify({ status }),

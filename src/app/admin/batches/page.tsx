@@ -83,15 +83,15 @@ export default function BatchesPage() {
     }
   };
 
-  const handleSetActive = async (id: number, currentActive: boolean) => {
-    if (currentActive) return; // Already active
-    if (!confirm("Are you sure you want to set this batch as active? Other batches will be deactivated.")) return;
+  const handleToggleActive = async (id: number, currentActive: boolean) => {
+    const action = currentActive ? "deactivate" : "activate";
+    if (!confirm(`Are you sure you want to ${action} this batch?${!currentActive ? " Other batches will be deactivated." : ""}`)) return;
     
     try {
-      await setActiveBatch(id, true);
+      await setActiveBatch(id, !currentActive);
       await fetchBatches();
     } catch (err: any) {
-      alert(err.message || "Failed to set active batch");
+      alert(err.message || `Failed to ${action} batch`);
     }
   };
 
@@ -175,9 +175,16 @@ export default function BatchesPage() {
                     </td>
                     <td className="p-4">
                       <div className="flex items-center justify-end gap-2">
-                        {!batch.is_active && (
+                        {batch.is_active ? (
                           <button
-                            onClick={() => handleSetActive(batch.id, Boolean(batch.is_active))}
+                            onClick={() => handleToggleActive(batch.id, true)}
+                            className="text-xs px-3 py-1.5 rounded-lg bg-yellow-500/10 text-yellow-400 hover:bg-yellow-500/20 transition-colors font-medium border border-yellow-500/20"
+                          >
+                            Deactivate
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() => handleToggleActive(batch.id, false)}
                             className="text-xs px-3 py-1.5 rounded-lg bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 transition-colors font-medium border border-blue-500/20"
                           >
                             Set Active

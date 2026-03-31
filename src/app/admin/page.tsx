@@ -53,8 +53,8 @@ export default function AdminDashboardPage() {
         let p = 0, e = 0, m = 0;
         _members.forEach(member => {
           if (member.devision === "PROGRAMMING") p++;
-          else if (member.devision === "ELECTRONIC") e++;
-          else if (member.devision === "MECHANIC") m++;
+          else if (member.devision === "ELECTRONICS") e++;
+          else if (member.devision === "MECHANICAL") m++;
         });
         setStats({ total: _members.length, programming: p, electronic: e, mechanic: m });
       }
