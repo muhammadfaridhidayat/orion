@@ -3,10 +3,12 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Eye, Check, X, Trash2, UserCheck, Clock, ShieldAlert } from "lucide-react";
-import { getMembers, updateMemberStatus, deleteMember, NewMember, Status, getActiveBatch, Batch } from "@/lib/api";
+import { getMembers, updateMemberStatus, deleteMember, NewMember, Status, getBatches, Batch } from "@/lib/api";
 
 export default function ApplicantsPage() {
-  const [members, setMembers] = useState<NewMember[]>([]);
+  const [allMembers, setAllMembers] = useState<NewMember[]>([]);
+  const [batches, setBatches] = useState<Batch[]>([]);
+  const [selectedBatchId, setSelectedBatchId] = useState<number | "all">("all");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   
@@ -18,21 +20,26 @@ export default function ApplicantsPage() {
       setLoading(true);
       setError("");
       
-      const batchRes = await getActiveBatch().catch(() => null);
-      let activeBatch: Batch | null = null;
-      if (batchRes && batchRes.batch) {
-        activeBatch = batchRes.batch;
+      const [batchesRes, membersRes] = await Promise.all([
+        getBatches().catch(() => null),
+        getMembers(1, 1000).catch((err) => { throw err; })
+      ]);
+
+      let allBatches: Batch[] = [];
+      if (batchesRes && batchesRes.batches) {
+        allBatches = batchesRes.batches;
+        setBatches(allBatches);
       }
 
-      const membersRes = await getMembers(1, 1000);
+      const activeBatch = allBatches.find(b => b.is_active);
+      if (activeBatch) {
+        setSelectedBatchId(activeBatch.id);
+      }
+
       if (membersRes && membersRes.members) {
-        let _members = membersRes.members || [];
-        
-        if (activeBatch) {
-          _members = _members.filter((m) => m.batch_id === activeBatch.id);
-        }
-        
-        setMembers(_members);
+        setAllMembers(membersRes.members);
+      } else {
+        setAllMembers([]);
       }
     } catch (err: any) {
       setError(err.message || "Failed to load applicants");
@@ -48,7 +55,7 @@ export default function ApplicantsPage() {
   const handleStatusChange = async (id: number, newStatus: Status) => {
     try {
       await updateMemberStatus(id, newStatus);
-      setMembers(members.map(app =>
+      setAllMembers(allMembers.map(app =>
         app.id === id ? { ...app, status: newStatus } : app
       ));
     } catch (err: any) {
@@ -60,11 +67,16 @@ export default function ApplicantsPage() {
     if (!confirm("Are you sure you want to delete this applicant?")) return;
     try {
       await deleteMember(id);
-      setMembers(members.filter(app => app.id !== id));
+      setAllMembers(allMembers.filter(app => app.id !== id));
     } catch (err: any) {
       alert(err.message || "Failed to delete applicant");
     }
   };
+
+  const displayedMembers = allMembers.filter(m => {
+    if (selectedBatchId === "all") return true;
+    return m.batch_id === selectedBatchId;
+  });
 
   const openPaymentModal = (url: string) => {
     setSelectedPaymentUrl((process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080") + url);
@@ -79,6 +91,22 @@ export default function ApplicantsPage() {
           <p className="text-gray-400 text-sm mt-1">
             Review and manage all applicant registrations.
           </p>
+        </div>
+        
+        {/* Batch Filter */}
+        <div className="flex items-center gap-3 bg-white/5 border border-white/10 p-1.5 rounded-xl">
+          <select
+            value={selectedBatchId}
+            onChange={(e) => setSelectedBatchId(e.target.value === "all" ? "all" : Number(e.target.value))}
+            className="bg-transparent text-sm text-gray-200 outline-none px-2 py-1.5 cursor-pointer max-w-[200px]"
+          >
+            <option value="all" className="bg-[#111111]">All Batches</option>
+            {batches.map(batch => (
+              <option key={batch.id} value={batch.id} className="bg-[#111111]">
+                {batch.name} {batch.is_active ? "(Active)" : ""}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
 
@@ -112,12 +140,12 @@ export default function ApplicantsPage() {
                 <tr>
                   <td colSpan={6} className="p-8 text-center text-red-500">{error}</td>
                 </tr>
-              ) : members.length === 0 ? (
+              ) : displayedMembers.length === 0 ? (
                 <tr>
                   <td colSpan={6} className="p-8 text-center text-gray-400">No applicants found.</td>
                 </tr>
               ) : (
-                members.map((app) => (
+                displayedMembers.map((app) => (
                   <tr key={app.id} className="hover:bg-white/[0.02] transition-colors">
                     <td className="p-4 text-sm font-mono text-gray-500">{app.id}</td>
                     <td className="p-4">
