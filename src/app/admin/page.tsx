@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Code2, Cpu, Wrench, Users, Building2 } from "lucide-react";
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { getActiveBatch, getMembers, getRegistrationTrend, Batch, NewMember, TrendData } from "@/lib/api";
 
 export default function AdminDashboardPage() {
@@ -35,7 +35,17 @@ export default function AdminDashboardPage() {
 
       const trendRes = await getRegistrationTrend().catch(() => null);
       if (trendRes && trendRes.trends) {
-        setTrendData(trendRes.trends);
+        const rawTrends = trendRes.trends;
+        if (rawTrends.length > 0) {
+          const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+          const paddedTrends = daysOfWeek.map(day => {
+            const found = rawTrends.find((t: any) => t.day === day);
+            return found || { day, programming: 0, electronic: 0, mechanic: 0 };
+          });
+          setTrendData(paddedTrends);
+        } else {
+          setTrendData([]);
+        }
       }
 
       const membersRes = await getMembers(1, 100);
@@ -142,42 +152,43 @@ export default function AdminDashboardPage() {
             <Building2 className="w-5 h-5 text-blue-400" />
             Registration Trend
           </h2>
-          <div className="h-[300px] w-full">
-            {trendData.length > 0 ? (
-              <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={trendData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-                  <defs>
-                    <linearGradient id="colorPrg" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#d4d4d8" stopOpacity={0.3} />
-                      <stop offset="95%" stopColor="#d4d4d8" stopOpacity={0} />
-                    </linearGradient>
-                    <linearGradient id="colorElc" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#a1a1aa" stopOpacity={0.3} />
-                      <stop offset="95%" stopColor="#a1a1aa" stopOpacity={0} />
-                    </linearGradient>
-                    <linearGradient id="colorMec" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#71717a" stopOpacity={0.3} />
-                      <stop offset="95%" stopColor="#71717a" stopOpacity={0} />
-                    </linearGradient>
-                  </defs>
-                  <XAxis dataKey="day" stroke="#525252" fontSize={12} tickLine={false} axisLine={false} />
-                  <YAxis stroke="#525252" fontSize={12} tickLine={false} axisLine={false} />
-                  <CartesianGrid strokeDasharray="3 3" stroke="#262626" vertical={false} />
-                  <Tooltip
-                    contentStyle={{ backgroundColor: '#0a0a0a', borderColor: '#262626', borderRadius: '12px', color: '#fff' }}
-                    itemStyle={{ color: '#e5e5e5' }}
-                  />
-                  <Area type="monotone" dataKey="programming" stroke="#d4d4d8" strokeWidth={2} fillOpacity={1} fill="url(#colorPrg)" />
-                  <Area type="monotone" dataKey="electronic" stroke="#a1a1aa" strokeWidth={2} fillOpacity={1} fill="url(#colorElc)" />
-                  <Area type="monotone" dataKey="mechanic" stroke="#71717a" strokeWidth={2} fillOpacity={1} fill="url(#colorMec)" />
-                </AreaChart>
-              </ResponsiveContainer>
-            ) : (
-              <div className="w-full h-full flex flex-col items-center justify-center text-gray-500 text-sm gap-2">
-                <Building2 className="w-8 h-8 opacity-50" />
-                <p>No trend data available for current active batch.</p>
-              </div>
-            )}
+          <div className="h-[300px] w-full overflow-x-auto">
+            <div className="min-w-[500px] h-full">
+              {trendData.length > 0 ? (
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={trendData} margin={{ top: 20, right: 30, left: 0, bottom: 0 }}>
+                    <defs>
+                      <filter id="glowPrg" x="-20%" y="-20%" width="140%" height="140%">
+                        <feDropShadow dx="0" dy="8" stdDeviation="8" floodColor="#60a5fa" floodOpacity="0.5" />
+                      </filter>
+                      <filter id="glowElc" x="-20%" y="-20%" width="140%" height="140%">
+                        <feDropShadow dx="0" dy="8" stdDeviation="8" floodColor="#a78bfa" floodOpacity="0.5" />
+                      </filter>
+                      <filter id="glowMec" x="-20%" y="-20%" width="140%" height="140%">
+                        <feDropShadow dx="0" dy="8" stdDeviation="8" floodColor="#fb923c" floodOpacity="0.5" />
+                      </filter>
+                    </defs>
+                    <XAxis dataKey="day" stroke="#737373" fontSize={12} tickLine={false} axisLine={false} tickMargin={10} />
+                    <YAxis stroke="#737373" fontSize={12} tickLine={false} axisLine={false} tickMargin={10} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#262626" vertical={false} />
+                    <Tooltip
+                      contentStyle={{ backgroundColor: '#171717', borderColor: '#262626', borderRadius: '12px', color: '#fff', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
+                      itemStyle={{ color: '#e5e5e5', fontSize: '13px' }}
+                      labelStyle={{ color: '#a3a3a3', fontSize: '12px', marginBottom: '4px' }}
+                      cursor={{ stroke: '#404040', strokeWidth: 1, strokeDasharray: '4 4' }}
+                    />
+                    <Line type="monotone" dataKey="programming" name="Programming" stroke="#60a5fa" strokeWidth={4} dot={false} activeDot={{ r: 6, strokeWidth: 0, fill: '#60a5fa' }} filter="url(#glowPrg)" />
+                    <Line type="monotone" dataKey="electronic" name="Electronic" stroke="#a78bfa" strokeWidth={4} dot={false} activeDot={{ r: 6, strokeWidth: 0, fill: '#a78bfa' }} filter="url(#glowElc)" />
+                    <Line type="monotone" dataKey="mechanic" name="Mechanic" stroke="#fb923c" strokeWidth={4} dot={false} activeDot={{ r: 6, strokeWidth: 0, fill: '#fb923c' }} filter="url(#glowMec)" />
+                  </LineChart>
+                </ResponsiveContainer>
+              ) : (
+                <div className="w-full h-full flex flex-col items-center justify-center text-gray-500 text-sm gap-2">
+                  <Building2 className="w-8 h-8 opacity-50" />
+                  <p>No trend data available for current active batch.</p>
+                </div>
+              )}
+            </div>
           </div>
         </motion.div>
 

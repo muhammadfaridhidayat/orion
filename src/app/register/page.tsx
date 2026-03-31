@@ -20,6 +20,19 @@ export default function RegisterPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [isRegistrationOpen, setIsRegistrationOpen] = useState<boolean | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!paymentProof) {
+      setPreviewUrl(null);
+      return;
+    }
+
+    const objectUrl = URL.createObjectURL(paymentProof);
+    setPreviewUrl(objectUrl);
+
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [paymentProof]);
 
   useEffect(() => {
     const checkRegistrationStatus = async () => {
@@ -269,19 +282,35 @@ export default function RegisterPage() {
 
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-2">Payment Proof (PDF/JPG/PNG)</label>
-              <div className="w-full border-2 border-dashed border-white/10 rounded-xl p-8 hover:bg-white/5 hover:border-white/20 transition-colors cursor-pointer flex flex-col items-center justify-center text-gray-400 group relative">
+              <div className="w-full border-2 border-dashed border-white/10 rounded-xl p-8 hover:bg-white/5 hover:border-white/20 transition-colors cursor-pointer flex flex-col items-center justify-center text-gray-400 group relative overflow-hidden">
                 <input
                   type="file"
                   accept=".pdf,.jpg,.jpeg,.png"
                   onChange={(e) => setPaymentProof(e.target.files?.[0] || null)}
-                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                   required
                 />
-                <UploadCloud className="w-8 h-8 mb-3 group-hover:text-blue-400 transition-colors" />
-                <span className="text-sm">
+                
+                {previewUrl ? (
+                  paymentProof?.type.startsWith('image/') ? (
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img src={previewUrl} alt="Payment Proof Preview" className="max-h-48 object-contain rounded-lg mb-3 shadow-lg" />
+                  ) : (
+                    <div className="flex flex-col items-center">
+                      <svg className="w-16 h-16 text-blue-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
+                      <span className="text-sm font-medium text-blue-400">Document Selected</span>
+                    </div>
+                  )
+                ) : (
+                  <UploadCloud className="w-8 h-8 mb-3 group-hover:text-blue-400 transition-colors" />
+                )}
+
+                <span className="text-sm text-center mt-2 px-2 truncate w-full max-w-[250px] relative z-20 pointer-events-none">
                   {paymentProof ? paymentProof.name : "Click to upload or drag and drop"}
                 </span>
-                {!paymentProof && <span className="text-xs text-gray-600 mt-1">Max file size: 5MB</span>}
+                {!paymentProof && <span className="text-xs text-gray-600 mt-1 relative z-20 pointer-events-none">Max file size: 5MB</span>}
               </div>
             </div>
 

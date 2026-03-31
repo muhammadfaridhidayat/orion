@@ -2,7 +2,7 @@
 
 import { useAuth } from "@/components/providers/AuthProvider";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { LayoutDashboard, Users, Settings, LogOut, Bell, Search, PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -10,15 +10,35 @@ import { motion, AnimatePresence } from "framer-motion";
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const { isAdmin, logout } = useAuth();
   const router = useRouter();
+  const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     setMounted(true);
     if (!isAdmin && localStorage.getItem("orion_admin_auth") !== "true") {
       router.push("/login");
     }
+
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    handleResize();
+    if (window.innerWidth < 768) {
+      setSidebarOpen(false);
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, [isAdmin, router]);
+
+  useEffect(() => {
+    if (isMobile) {
+      setSidebarOpen(false);
+    }
+  }, [pathname]);
 
   if (!mounted || !isAdmin) return <div className="min-h-screen bg-[#050505]" />;
 
@@ -27,6 +47,19 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* Sidebar background gradient */}
       <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-white/[0.03] rounded-full blur-[100px] pointer-events-none" />
 
+      {/* Sidebar Overlay for Mobile */}
+      <AnimatePresence>
+        {isMobile && sidebarOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSidebarOpen(false)}
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden"
+          />
+        )}
+      </AnimatePresence>
+
       {/* Sidebar */}
       <AnimatePresence initial={false}>
         {sidebarOpen && (
@@ -34,44 +67,41 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             initial={{ width: 0, opacity: 0 }}
             animate={{ width: 280, opacity: 1 }}
             exit={{ width: 0, opacity: 0 }}
-            className="flex-shrink-0 bg-[#0a0a0a] border-r border-white/5 relative z-20 flex flex-col h-screen"
+            className="fixed md:relative top-0 left-0 flex-shrink-0 bg-[#0a0a0a] border-r border-white/5 z-50 flex flex-col h-screen"
           >
             <div className="h-20 flex items-center px-6 border-b border-white/5">
               <Link href="/admin" className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-full border border-white/20 bg-white/5 flex items-center justify-center overflow-hidden shrink-0">
                   <img src="/logo.jpeg" alt="OrionUnhaz Logo" className="w-full h-full object-cover" />
                 </div>
-                <span className="text-xl font-bold tracking-tight text-white whitespace-nowrap overflow-hidden ml-1">Orion Panel</span>
+                <span className="text-xl font-bold tracking-tight text-white whitespace-nowrap overflow-hidden ml-1">Admin Panel</span>
               </Link>
             </div>
 
             <div className="flex-1 py-8 px-4 space-y-2 overflow-y-auto w-full">
               <p className="px-4 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4 whitespace-nowrap overflow-hidden">Overview</p>
 
-              <Link href="/admin" className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-colors whitespace-nowrap ${
-                typeof window !== 'undefined' && window.location.pathname === '/admin' 
-                  ? 'bg-white/10 text-white font-medium' 
+              <Link href="/admin" className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-colors whitespace-nowrap ${pathname === '/admin'
+                  ? 'bg-white/10 text-white font-medium'
                   : 'text-gray-400 hover:bg-white/5 hover:text-white'
-              }`}>
+                }`}>
                 <LayoutDashboard className="w-5 h-5 shrink-0" />
                 <span>Dashboard</span>
               </Link>
 
-              <Link href="/admin/applicants" className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-colors whitespace-nowrap ${
-                typeof window !== 'undefined' && window.location.pathname.startsWith('/admin/applicants')
-                  ? 'bg-white/10 text-white font-medium' 
+              <Link href="/admin/applicants" className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-colors whitespace-nowrap ${pathname.startsWith('/admin/applicants')
+                  ? 'bg-white/10 text-white font-medium'
                   : 'text-gray-400 hover:bg-white/5 hover:text-white'
-              }`}>
+                }`}>
                 <Users className="w-5 h-5 shrink-0" />
                 <span>Applicants</span>
               </Link>
 
               <p className="px-4 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4 mt-8 whitespace-nowrap overflow-hidden">Configuration</p>
-              <Link href="/admin/batches" className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-colors whitespace-nowrap ${
-                typeof window !== 'undefined' && window.location.pathname === '/admin/batches' 
-                  ? 'bg-white/10 text-white font-medium' 
+              <Link href="/admin/batches" className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-colors whitespace-nowrap ${pathname === '/admin/batches'
+                  ? 'bg-white/10 text-white font-medium'
                   : 'text-gray-400 hover:bg-white/5 hover:text-white'
-              }`}>
+                }`}>
                 <Settings className="w-5 h-5 shrink-0" />
                 <span>Batches</span>
               </Link>
@@ -93,7 +123,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col h-screen min-w-0 relative z-10">
         {/* Topbar */}
-        <header className="h-20 bg-[#0a0a0a]/50 backdrop-blur-md border-b border-white/5 flex items-center justify-between px-8 sticky top-0 z-30">
+        <header className="h-20 bg-[#0a0a0a]/50 backdrop-blur-md border-b border-white/5 flex items-center justify-between px-4 md:px-8 sticky top-0 z-30">
           <div className="flex items-center gap-4">
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
