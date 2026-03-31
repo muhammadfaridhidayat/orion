@@ -48,21 +48,32 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <div className="flex-1 py-8 px-4 space-y-2 overflow-y-auto w-full">
               <p className="px-4 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4 whitespace-nowrap overflow-hidden">Overview</p>
 
-              <Link href="/admin" className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/10 text-white font-medium whitespace-nowrap">
+              <Link href="/admin" className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-colors whitespace-nowrap ${
+                typeof window !== 'undefined' && window.location.pathname === '/admin' 
+                  ? 'bg-white/10 text-white font-medium' 
+                  : 'text-gray-400 hover:bg-white/5 hover:text-white'
+              }`}>
                 <LayoutDashboard className="w-5 h-5 shrink-0" />
                 <span>Dashboard</span>
               </Link>
 
-              <Link href="#" className="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-white/5 hover:text-white transition-colors whitespace-nowrap">
+              <Link href="/admin/applicants" className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-colors whitespace-nowrap ${
+                typeof window !== 'undefined' && window.location.pathname.startsWith('/admin/applicants')
+                  ? 'bg-white/10 text-white font-medium' 
+                  : 'text-gray-400 hover:bg-white/5 hover:text-white'
+              }`}>
                 <Users className="w-5 h-5 shrink-0" />
                 <span>Applicants</span>
-                <span className="ml-auto bg-white/10 text-xs py-0.5 px-2 rounded-full">115</span>
               </Link>
 
               <p className="px-4 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4 mt-8 whitespace-nowrap overflow-hidden">Configuration</p>
-              <Link href="#" className="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-white/5 hover:text-white transition-colors whitespace-nowrap">
+              <Link href="/admin/batches" className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-colors whitespace-nowrap ${
+                typeof window !== 'undefined' && window.location.pathname === '/admin/batches' 
+                  ? 'bg-white/10 text-white font-medium' 
+                  : 'text-gray-400 hover:bg-white/5 hover:text-white'
+              }`}>
                 <Settings className="w-5 h-5 shrink-0" />
-                <span>Settings</span>
+                <span>Batches</span>
               </Link>
             </div>
 
