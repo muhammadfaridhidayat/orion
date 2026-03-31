@@ -7,10 +7,53 @@ import { Code2, Cpu, Wrench, Users, UserCheck, Clock, ShieldAlert, Check, X, Bui
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 export default function AdminDashboardPage() {
+  // --- BACKEND INTEGRATION POINT: FETCH APPLICANTS ---
+  // Example implementation to fetch data on mount:
+  // useEffect(() => {
+  //   const fetchApplicants = async () => {
+  //     try {
+  //       const response = await fetch('https://your-api.com/v1/applicants', {
+  //         headers: { 
+  //           'Authorization': `Bearer ${localStorage.getItem('orion_admin_token')}` 
+  //         }
+  //       });
+  //       const data = await response.json();
+  //       setApplicants(data);
+  //     } catch (error) {
+  //       console.error('Failed to fetch applicants:', error);
+  //     }
+  //   };
+  //   fetchApplicants();
+  // }, []);
+
   const [applicants, setApplicants] = useState(MOCK_APPLICANTS);
   const [regOpen, setRegOpen] = useState(true);
 
   const handleStatusChange = (id: string, newStatus: "Verified" | "Rejected") => {
+    // --- BACKEND INTEGRATION POINT: UPDATE STATUS ---
+    // Example implementation:
+    // const updateStatus = async () => {
+    //   try {
+    //     const response = await fetch(`https://your-api.com/v1/applicants/${id}/status`, {
+    //       method: 'PUT',
+    //       headers: { 
+    //         'Content-Type': 'application/json',
+    //         'Authorization': `Bearer ${localStorage.getItem('orion_admin_token')}`
+    //       },
+    //       body: JSON.stringify({ status: newStatus })
+    //     });
+    //     if (!response.ok) throw new Error('Failed to update status');
+    //     
+    //     // Update local state after successful API call
+    //     setApplicants(applicants.map(app => 
+    //       app.id === id ? { ...app, status: newStatus } : app
+    //     ));
+    //   } catch (error) {
+    //     console.error('Status update failed:', error);
+    //   }
+    // };
+    // updateStatus();
+
     setApplicants(applicants.map(app =>
       app.id === id ? { ...app, status: newStatus } : app
     ));
