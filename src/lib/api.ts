@@ -104,8 +104,14 @@ export const deleteBatch = async (id: number) => {
 };
 
 // MEMBER ENDPOINTS
-export const getMembers = async (page = 1, limit = 10, query = "") => {
-  const res = await fetch(`${API_URL}/api/v1/member/all?page=${page}&limit=${limit}&query=${query}`, {
+export const getMembers = async (page = 1, limit = 10, query = "", batchId?: number) => {
+  const params = new URLSearchParams({
+    page: String(page),
+    limit: String(limit),
+    query,
+  });
+  if (batchId !== undefined) params.set("batch_id", String(batchId));
+  const res = await fetch(`${API_URL}/api/v1/member/all?${params.toString()}`, {
     headers: getAuthHeaders(),
     credentials: "include",
   });
