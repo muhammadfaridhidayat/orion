@@ -24,6 +24,7 @@ export default function ApplicantsPage() {
 
   const [paymentModalOpen, setPaymentModalOpen] = useState(false);
   const [selectedPaymentUrl, setSelectedPaymentUrl] = useState("");
+  const [selectedPaymentLoading, setSelectedPaymentLoading] = useState(false);
 
   // ── Debounce the search input ──────────────────────────────────────────────
   const handleSearchChange = (value: string) => {
@@ -126,6 +127,7 @@ export default function ApplicantsPage() {
 
   const openPaymentModal = (url: string) => {
     setSelectedPaymentUrl(url.startsWith("http") ? url : API_URL + url);
+    setSelectedPaymentLoading(true);
     setPaymentModalOpen(true);
   };
 
@@ -352,10 +354,10 @@ export default function ApplicantsPage() {
                   totalPages <= 5
                     ? i + 1
                     : currentPage <= 3
-                    ? i + 1
-                    : currentPage >= totalPages - 2
-                    ? totalPages - 4 + i
-                    : currentPage - 2 + i;
+                      ? i + 1
+                      : currentPage >= totalPages - 2
+                        ? totalPages - 4 + i
+                        : currentPage - 2 + i;
                 return (
                   <button
                     key={page}
@@ -410,14 +412,25 @@ export default function ApplicantsPage() {
                   <X className="w-5 h-5" />
                 </button>
               </div>
-              <div className="flex-1 w-full bg-black/20 flex items-center justify-center p-6">
+              <div className="flex-1 w-full bg-black/20 flex items-center justify-center p-6 relative">
+                {selectedPaymentLoading && (
+                  <div className="absolute inset-0 flex flex-col gap-3 items-center justify-center text-blue-400">
+                    <Loader2 className="w-8 h-8 animate-spin" />
+                    <span className="text-sm font-medium animate-pulse">Loading Document...</span>
+                  </div>
+                )}
                 {selectedPaymentUrl.toLowerCase().endsWith(".pdf") ? (
-                  <iframe src={selectedPaymentUrl} className="w-full h-[60vh] rounded-lg bg-white" />
+                  <iframe
+                    src={selectedPaymentUrl}
+                    onLoad={() => setSelectedPaymentLoading(false)}
+                    className={`w-full h-[60vh] rounded-lg bg-white relative z-10 transition-opacity duration-300 ${selectedPaymentLoading ? "opacity-0" : "opacity-100"}`}
+                  />
                 ) : (
                   <img
                     src={selectedPaymentUrl}
                     alt="Payment Proof"
-                    className="max-h-[60vh] object-contain rounded-lg shadow-xl"
+                    onLoad={() => setSelectedPaymentLoading(false)}
+                    className={`max-h-[60vh] object-contain rounded-lg shadow-xl relative z-10 transition-opacity duration-300 ${selectedPaymentLoading ? "opacity-0" : "opacity-100"}`}
                   />
                 )}
               </div>

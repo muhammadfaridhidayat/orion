@@ -131,14 +131,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             >
               {sidebarOpen ? <PanelLeftClose className="w-5 h-5" /> : <PanelLeftOpen className="w-5 h-5" />}
             </button>
-            <div className="relative hidden md:block">
+            {/* <div className="relative hidden md:block">
               <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
               <input
                 type="text"
                 placeholder="Search applicants..."
                 className="bg-black/50 border border-white/10 rounded-full py-2 pl-10 pr-4 text-sm focus:outline-none focus:border-gray-400/50 w-64 text-white"
               />
-            </div>
+            </div> */}
           </div>
 
           <div className="flex items-center gap-4">
