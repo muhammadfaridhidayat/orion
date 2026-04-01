@@ -4,12 +4,12 @@ import { motion } from "framer-motion";
 
 export function ActivitySection() {
   const images = [
-    { src: "/foto-rame.jpg", alt: "Students working on robot", span: "md:col-span-2 md:row-span-2" },
-    { src: "/sumo.jpeg", alt: "Robot component", span: "md:col-span-1 md:row-span-1" },
-    { src: "/motherboard-soccer.jpeg", alt: "Soldering circuit board", span: "md:col-span-1 md:row-span-1" },
-    { src: "3d-printer.jpeg", alt: "Computer vision analysis", span: "md:col-span-1 md:row-span-1" },
-    { src: "/pnbrc-bali.jpeg", alt: "Team discussion", span: "md:col-span-1 md:row-span-1" },
-    { src: "/eltion3.jpg", alt: "Team discussion", span: "md:col-span-1 md:row-span-1" },
+    { src: "https://res.cloudinary.com/dxrxewurm/image/upload/v1775073438/DSCF6536_-_Copy_ssjxp8.jpg", alt: "All Together", span: "md:col-span-2 md:row-span-2" },
+    { src: "https://res.cloudinary.com/dxrxewurm/image/upload/v1775072324/sumo1_vodhfc.jpg", alt: "Sumo Robot", span: "md:col-span-1 md:row-span-1" },
+    { src: "https://res.cloudinary.com/dxrxewurm/image/upload/v1775072325/sumo_oo45zi.jpg", alt: "Robot Component", span: "md:col-span-1 md:row-span-1" },
+    { src: "https://res.cloudinary.com/dxrxewurm/image/upload/v1775072324/pnbrc_bali_prztfd.jpg", alt: "PNBRC Bali 2025", span: "md:col-span-1 md:row-span-1" },
+    { src: "https://res.cloudinary.com/dxrxewurm/image/upload/v1775072581/eltion3_1_qypk0w.jpg", alt: "Competition Preparation", span: "md:col-span-1 md:row-span-1" },
+    { src: "https://res.cloudinary.com/dxrxewurm/image/upload/v1775073529/DSCF9005_tqzioq.jpg", alt: "Eltion Unram 2025", span: "md:col-span-1 md:row-span-1" },
   ];
 
   return (
