@@ -29,7 +29,7 @@ export interface Batch {
   new_members: NewMember[] | null;
 }
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
+export const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
 
 function getAuthHeaders(): HeadersInit {
   const token = localStorage.getItem("orion_admin_token");

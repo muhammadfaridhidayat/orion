@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Eye, Check, X, Trash2, UserCheck, Clock, ShieldAlert } from "lucide-react";
-import { getMembers, updateMemberStatus, deleteMember, NewMember, Status, getBatches, Batch } from "@/lib/api";
+import { getMembers, updateMemberStatus, deleteMember, NewMember, Status, getBatches, Batch, API_URL } from "@/lib/api";
 
 export default function ApplicantsPage() {
   const [allMembers, setAllMembers] = useState<NewMember[]>([]);
@@ -79,8 +79,13 @@ export default function ApplicantsPage() {
   });
 
   const openPaymentModal = (url: string) => {
-    setSelectedPaymentUrl((process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080") + url);
+    setSelectedPaymentUrl(API_URL + url);
     setPaymentModalOpen(true);
+  };
+
+  const getBatchName = (batchId: number) => {
+    const batch = batches.find(b => b.id === batchId);
+    return batch ? batch.name : `Batch ${batchId}`;
   };
 
   return (
@@ -126,6 +131,7 @@ export default function ApplicantsPage() {
                 <th className="p-4 font-semibold">ID</th>
                 <th className="p-4 font-semibold">Applicant</th>
                 <th className="p-4 font-semibold">Division</th>
+                <th className="p-4 font-semibold">Batch</th>
                 <th className="p-4 font-semibold">Contact / Document</th>
                 <th className="p-4 font-semibold">Status</th>
                 <th className="p-4 font-semibold text-right">Actions</th>
@@ -134,15 +140,15 @@ export default function ApplicantsPage() {
             <tbody className="divide-y divide-white/5">
               {loading ? (
                 <tr>
-                  <td colSpan={6} className="p-8 text-center text-gray-400">Loading applicants...</td>
+                  <td colSpan={7} className="p-8 text-center text-gray-400">Loading applicants...</td>
                 </tr>
               ) : error ? (
                 <tr>
-                  <td colSpan={6} className="p-8 text-center text-red-500">{error}</td>
+                  <td colSpan={7} className="p-8 text-center text-red-500">{error}</td>
                 </tr>
               ) : displayedMembers.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="p-8 text-center text-gray-400">No applicants found.</td>
+                  <td colSpan={7} className="p-8 text-center text-gray-400">No applicants found.</td>
                 </tr>
               ) : (
                 displayedMembers.map((app) => (
@@ -163,6 +169,9 @@ export default function ApplicantsPage() {
                       <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium border bg-white/5 text-gray-300 border-white/10`}>
                         {app.devision}
                       </span>
+                    </td>
+                    <td className="p-4">
+                      <span className="text-sm text-gray-300">{getBatchName(app.batch_id)}</span>
                     </td>
                     <td className="p-4">
                       <p className="text-xs text-gray-400 mb-1">{app.phone_number}</p>

@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { API_URL } from "@/lib/api";
 
 type AuthContextType = {
   isAdmin: boolean;
@@ -38,7 +39,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   // Example implementation using standard fetch:
   const login = async (email: string, password: string) => {
     try {
-      const response = await fetch('http://localhost:8080/api/v1/user/login', {
+      const response = await fetch(`${API_URL}/api/v1/user/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: "include",

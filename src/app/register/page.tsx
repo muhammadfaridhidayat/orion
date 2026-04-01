@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { UploadCloud, CheckCircle2, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
+import { API_URL } from "@/lib/api";
 
 export default function RegisterPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -37,8 +38,7 @@ export default function RegisterPage() {
   useEffect(() => {
     const checkRegistrationStatus = async () => {
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
-        const res = await fetch(`${apiUrl}/api/v1/batch/active`);
+        const res = await fetch(`${API_URL}/api/v1/batch/active`);
         if (res.ok) {
           setIsRegistrationOpen(true);
         } else {
@@ -73,8 +73,7 @@ export default function RegisterPage() {
 
       submitData.append("payment", paymentProof);
 
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
-      const response = await fetch(`${apiUrl}/api/v1/member/register`, {
+      const response = await fetch(`${API_URL}/api/v1/member/register`, {
         method: "POST",
         body: submitData,
       });
