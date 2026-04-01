@@ -29,7 +29,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const response = await fetch(`${API_URL}/api/v1/user/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        credentials: "include",
         body: JSON.stringify({ email, password })
       });
 

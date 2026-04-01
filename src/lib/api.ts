@@ -29,7 +29,7 @@ export interface Batch {
   new_members: NewMember[] | null;
 }
 
-export const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
+export const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 function getAuthHeaders(): HeadersInit {
   const token = localStorage.getItem("orion_admin_token");
@@ -49,17 +49,15 @@ async function handleResponse<T>(res: Response): Promise<T> {
 
 // BATCH ENDPOINTS
 export const getBatches = async () => {
-  const res = await fetch(`${API_URL}/api/v1/batch/all`, { 
-    headers: getAuthHeaders(), 
-    credentials: "include" 
+  const res = await fetch(`${API_URL}/api/v1/batch/all`, {
+    headers: getAuthHeaders(),
   });
   return handleResponse<{ batches: Batch[] }>(res);
 };
 
 export const getActiveBatch = async () => {
-  const res = await fetch(`${API_URL}/api/v1/batch/active`, { 
-    headers: getAuthHeaders(), 
-    credentials: "include" 
+  const res = await fetch(`${API_URL}/api/v1/batch/active`, {
+    headers: getAuthHeaders(),
   });
   return handleResponse<{ batch: Batch }>(res);
 };
@@ -68,7 +66,6 @@ export const createBatch = async (data: Partial<Batch>) => {
   const res = await fetch(`${API_URL}/api/v1/batch/create`, {
     method: "POST",
     headers: getAuthHeaders(),
-    credentials: "include",
     body: JSON.stringify(data),
   });
   return handleResponse<{ batch: Batch }>(res);
@@ -78,7 +75,6 @@ export const updateBatch = async (id: number, data: Partial<Batch>) => {
   const res = await fetch(`${API_URL}/api/v1/batch/${id}`, {
     method: "PUT",
     headers: getAuthHeaders(),
-    credentials: "include",
     body: JSON.stringify(data),
   });
   return handleResponse<void>(res);
@@ -88,7 +84,6 @@ export const setActiveBatch = async (id: number, isActive: boolean) => {
   const res = await fetch(`${API_URL}/api/v1/batch/${id}/active`, {
     method: "PUT",
     headers: getAuthHeaders(),
-    credentials: "include",
     body: JSON.stringify({ is_active: isActive }),
   });
   return handleResponse<{ id: number; is_active: boolean }>(res);
@@ -98,7 +93,6 @@ export const deleteBatch = async (id: number) => {
   const res = await fetch(`${API_URL}/api/v1/batch/${id}`, {
     method: "DELETE",
     headers: getAuthHeaders(),
-    credentials: "include",
   });
   return handleResponse<void>(res);
 };
@@ -113,7 +107,6 @@ export const getMembers = async (page = 1, limit = 10, query = "", batchId?: num
   if (batchId !== undefined) params.set("batch_id", String(batchId));
   const res = await fetch(`${API_URL}/api/v1/member/all?${params.toString()}`, {
     headers: getAuthHeaders(),
-    credentials: "include",
   });
   return handleResponse<{ members: NewMember[] }>(res);
 };
@@ -122,7 +115,6 @@ export const updateMemberStatus = async (id: number, status: Status) => {
   const res = await fetch(`${API_URL}/api/v1/member/${id}/status`, {
     method: "PUT",
     headers: getAuthHeaders(),
-    credentials: "include",
     body: JSON.stringify({ status }),
   });
   return handleResponse<{ id: number; status: Status }>(res);
@@ -132,7 +124,6 @@ export const deleteMember = async (id: number) => {
   const res = await fetch(`${API_URL}/api/v1/member/${id}`, {
     method: "DELETE",
     headers: getAuthHeaders(),
-    credentials: "include",
   });
   return handleResponse<void>(res);
 };
@@ -147,7 +138,6 @@ export interface TrendData {
 export const getRegistrationTrend = async () => {
   const res = await fetch(`${API_URL}/api/v1/member/trend`, {
     headers: getAuthHeaders(),
-    credentials: "include",
   });
   return handleResponse<{ trends: TrendData[] }>(res);
 };
