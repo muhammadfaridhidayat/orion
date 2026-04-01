@@ -24,19 +24,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  // const login = (password: string) => {
-  //   // Dummy authentication: password is 'admin123'
-  //   if (password === "admin123") {
-  //     setIsAdmin(true);
-  //     localStorage.setItem("orion_admin_auth", "true");
-  //     router.push("/admin");
-  //     return true;
-  //   }
-  //   return false;
-  // };
-
-  // --- BACKEND INTEGRATION POINT: ADMIN LOGIN ---
-  // Example implementation using standard fetch:
   const login = async (email: string, password: string) => {
     try {
       const response = await fetch(`${API_URL}/api/v1/user/login`, {
@@ -48,14 +35,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       // Parse JSON even if response is 401/400 to get error messages
       const result = await response.json().catch(() => ({}));
-      
+
       if (response.ok && result.success && result.data && result.data.token) {
         localStorage.setItem("orion_admin_token", result.data.token);
         setIsAdmin(true);
         router.push("/admin");
         return true;
       }
-      
+
       console.warn("Login failed:", result.message || "Invalid credentials");
       return false;
     } catch (error) {

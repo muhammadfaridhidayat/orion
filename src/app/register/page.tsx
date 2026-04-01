@@ -81,13 +81,6 @@ export default function RegisterPage() {
       if (!response.ok) {
         const errData = await response.json().catch(() => ({}));
 
-        // Check entire response for duplicate NIM error
-        // const rawError = JSON.stringify(errData);
-        // if (rawError.includes("duplicate key") || rawError.includes("unique constraint") || rawError.includes("idx_new_members_nim")) {
-        //   setErrorMsg("This NIM (Student ID) is already registered.");
-        //   return;
-        // }
-
         let errorMessage = errData.message || "Registration failed. Please try again.";
         if (errData.errors) {
           const details = Object.values(errData.errors).join(", ");
