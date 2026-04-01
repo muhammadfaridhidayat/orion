@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Eye, Check, X, Trash2, UserCheck, Clock, ShieldAlert, Search, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
+import { Eye, Check, X, Trash2, UserCheck, Clock, ShieldAlert, Search, ChevronLeft, ChevronRight, Loader2, FileText } from "lucide-react";
 import { getMembers, updateMemberStatus, deleteMember, NewMember, Status, getBatches, Batch, API_URL } from "@/lib/api";
 
 const PAGE_LIMIT = 15;
@@ -25,6 +25,9 @@ export default function ApplicantsPage() {
   const [paymentModalOpen, setPaymentModalOpen] = useState(false);
   const [selectedPaymentUrl, setSelectedPaymentUrl] = useState("");
   const [selectedPaymentLoading, setSelectedPaymentLoading] = useState(false);
+  
+  const [motivationModalOpen, setMotivationModalOpen] = useState(false);
+  const [selectedMotivation, setSelectedMotivation] = useState("");
 
   // ── Debounce the search input ──────────────────────────────────────────────
   const handleSearchChange = (value: string) => {
@@ -129,6 +132,11 @@ export default function ApplicantsPage() {
     setSelectedPaymentUrl(url.startsWith("http") ? url : API_URL + url);
     setSelectedPaymentLoading(true);
     setPaymentModalOpen(true);
+  };
+
+  const openMotivationModal = (motivation: string) => {
+    setSelectedMotivation(motivation || "No motivation provided.");
+    setMotivationModalOpen(true);
   };
 
   const getBatchName = (batchId: number | null) => {
@@ -272,15 +280,26 @@ export default function ApplicantsPage() {
                     </td>
                     <td className="p-4">
                       <p className="text-xs text-gray-400 mb-1">{app.phone_number}</p>
-                      {app.payment && (
-                        <button
-                          onClick={() => openPaymentModal(app.payment)}
-                          className="flex items-center gap-1.5 text-xs text-blue-400 hover:text-blue-300 transition-colors"
-                        >
-                          <Eye className="w-3.5 h-3.5" />
-                          View Document
-                        </button>
-                      )}
+                      <div className="flex flex-col gap-1.5">
+                        {app.payment && (
+                          <button
+                            onClick={() => openPaymentModal(app.payment)}
+                            className="flex items-center gap-1.5 text-xs text-blue-400 hover:text-blue-300 transition-colors focus:outline-none"
+                          >
+                            <Eye className="w-3.5 h-3.5" />
+                            View Document
+                          </button>
+                        )}
+                        {app.motivation && (
+                          <button
+                            onClick={() => openMotivationModal(app.motivation)}
+                            className="flex items-center gap-1.5 text-xs text-purple-400 hover:text-purple-300 transition-colors focus:outline-none"
+                          >
+                            <FileText className="w-3.5 h-3.5" />
+                            View Motivation
+                          </button>
+                        )}
+                      </div>
                     </td>
                     <td className="p-4">
                       <span
@@ -443,6 +462,47 @@ export default function ApplicantsPage() {
                 >
                   Open in New Tab
                 </a>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+      {/* ── Motivation Modal ───────────────────────────────────────────── */}
+      <AnimatePresence>
+        {motivationModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMotivationModalOpen(false)}
+              className="absolute inset-0 bg-black/80 backdrop-blur-md"
+            />
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              className="relative w-full max-w-lg bg-[#0f0f0f] border border-white/10 rounded-2xl shadow-2xl overflow-hidden flex flex-col"
+            >
+              <div className="p-4 border-b border-white/10 flex justify-between items-center bg-black/50">
+                <h3 className="font-semibold text-white">Applicant Motivation</h3>
+                <button
+                  onClick={() => setMotivationModalOpen(false)}
+                  className="p-1.5 rounded-lg bg-white/5 text-gray-400 hover:text-white hover:bg-white/10 transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+              <div className="p-6 text-gray-300 text-sm whitespace-pre-wrap max-h-[60vh] overflow-y-auto w-full break-words">
+                {selectedMotivation}
+              </div>
+              <div className="p-4 border-t border-white/10 bg-black/50 flex justify-end">
+                <button
+                  onClick={() => setMotivationModalOpen(false)}
+                  className="text-sm font-medium px-4 py-2 rounded-xl bg-white/5 text-white hover:bg-white/10 transition-colors"
+                >
+                  Close
+                </button>
               </div>
             </motion.div>
           </div>

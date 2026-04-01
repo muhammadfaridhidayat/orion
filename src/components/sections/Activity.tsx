@@ -4,11 +4,12 @@ import { motion } from "framer-motion";
 
 export function ActivitySection() {
   const images = [
-    { src: "https://images.unsplash.com/photo-1581090464733-5c8e762c2f70?q=80&w=600&auto=format&fit=crop", alt: "Students working on robot", span: "md:col-span-2 md:row-span-2" },
-    { src: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=600&auto=format&fit=crop", alt: "Robot component", span: "md:col-span-1 md:row-span-1" },
-    { src: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=600&auto=format&fit=crop", alt: "Soldering circuit board", span: "md:col-span-1 md:row-span-1" },
-    { src: "https://images.unsplash.com/photo-1535378917042-10a22c95931a?q=80&w=600&auto=format&fit=crop", alt: "Computer vision analysis", span: "md:col-span-1 md:row-span-1" },
-    { src: "https://images.unsplash.com/photo-1563206767-5b18f218e8de?q=80&w=600&auto=format&fit=crop", alt: "Team discussion", span: "md:col-span-1 md:row-span-1" },
+    { src: "/foto-rame.jpg", alt: "Students working on robot", span: "md:col-span-2 md:row-span-2" },
+    { src: "/sumo.jpeg", alt: "Robot component", span: "md:col-span-1 md:row-span-1" },
+    { src: "/motherboard-soccer.jpeg", alt: "Soldering circuit board", span: "md:col-span-1 md:row-span-1" },
+    { src: "3d-printer.jpeg", alt: "Computer vision analysis", span: "md:col-span-1 md:row-span-1" },
+    { src: "/pnbrc-bali.jpeg", alt: "Team discussion", span: "md:col-span-1 md:row-span-1" },
+    { src: "/eltion3.jpg", alt: "Team discussion", span: "md:col-span-1 md:row-span-1" },
   ];
 
   return (
@@ -21,9 +22,13 @@ export function ActivitySection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl md:text-5xl font-bold mb-4 text-white glow-text">Life at OrionUnhaz</h2>
-            <p className="text-gray-400 max-w-lg">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 text-white">Life at OrionUnhaz</h2>
+            {/* <h2 className="text-3xl md:text-5xl font-bold mb-4 text-white glow-text">Kehidupan di OrionUnhaz</h2> */}
+            {/* <p className="text-gray-400 max-w-lg">
               Moments from our workshops, hackathons, and national competitions.
+            </p> */}
+            <p className="text-gray-400 max-w-lg">
+              Momen-momen dari lokakarya, hackathon, dan kompetisi tingkat nasional kami.
             </p>
           </motion.div>
           <motion.button
@@ -32,7 +37,8 @@ export function ActivitySection() {
             viewport={{ once: true }}
             className="px-6 py-2 rounded-full border border-white/10 bg-[#050505] text-gray-300 hover:text-white hover:border-white/20 transition-all text-sm"
           >
-            Follow our Instagram
+            {/* Follow our Instagram */}
+            Ikuti Instagram kami
           </motion.button>
         </div>
 

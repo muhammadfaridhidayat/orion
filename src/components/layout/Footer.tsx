@@ -16,8 +16,11 @@ export function Footer() {
               </div>
               <span className="text-xl font-bold text-white tracking-tight ml-1">OrionUnhaz</span>
             </div>
-            <p className="text-sm leading-relaxed mb-6">
+            {/* <p className="text-sm leading-relaxed mb-6">
               Pioneering the future of robotics at the university level. We design, build, and program autonomous systems.
+            </p> */}
+            <p className="text-sm leading-relaxed mb-6">
+              Merintis masa depan robotika di tingkat universitas. Kami merancang, membangun, dan memprogram sistem otonom.
             </p>
             <div className="flex gap-4">
               <a href="#" className="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-white/10 hover:text-white transition-colors">
@@ -33,48 +36,62 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="text-white font-semibold mb-6">Divisions</h4>
+            {/* <h4 className="text-white font-semibold mb-6">Divisions</h4> */}
+            <h4 className="text-white font-semibold mb-6">Divisi</h4>
             <ul className="space-y-3 text-sm">
               <li><a href="#" className="hover:text-white transition-colors">Programming</a></li>
+              {/* <li><a href="#" className="hover:text-white transition-colors">Pemrograman</a></li> */}
               <li><a href="#" className="hover:text-white transition-colors">Electronic</a></li>
+              {/* <li><a href="#" className="hover:text-white transition-colors">Elektronik</a></li> */}
               <li><a href="#" className="hover:text-white transition-colors">Mechanic</a></li>
+              {/* <li><a href="#" className="hover:text-white transition-colors">Mekanik</a></li> */}
             </ul>
           </div>
 
           <div>
-            <h4 className="text-white font-semibold mb-6">Quick Links</h4>
+            {/* <h4 className="text-white font-semibold mb-6">Quick Links</h4> */}
+            <h4 className="text-white font-semibold mb-6">Tautan Cepat</h4>
             <ul className="space-y-3 text-sm">
               <li><a href="#about" className="hover:text-white transition-colors">About Us</a></li>
+              {/* <li><a href="#about" className="hover:text-white transition-colors">Tentang Kami</a></li> */}
               <li><a href="#" className="hover:text-white transition-colors">Projects</a></li>
+              {/* <li><a href="#" className="hover:text-white transition-colors">Proyek</a></li> */}
               <li><a href="/join" className="hover:text-white transition-colors">Join Club</a></li>
+              {/* <li><a href="/join" className="hover:text-white transition-colors">Gabung Klub</a></li> */}
               <li><a href="/login" className="hover:text-white transition-colors">Admin Login</a></li>
+              {/* <li><a href="/login" className="hover:text-white transition-colors">Masuk Admin</a></li> */}
             </ul>
           </div>
 
           <div>
-            <h4 className="text-white font-semibold mb-6">Contact Us</h4>
+            {/* <h4 className="text-white font-semibold mb-6">Contact Us</h4> */}
+            <h4 className="text-white font-semibold mb-6">Hubungi Kami</h4>
             <ul className="space-y-4 text-sm">
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-gray-500 shrink-0" />
-                <span>Student Center Building, Floor 2<br />University Campus</span>
+                {/* <span>Student Center Building, Floor 2<br />University Campus</span> */}
+                <span>Fakultas Teknik<br />Universitas Hamzanwadi</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-gray-500 shrink-0" />
-                <span>contact@orionunhaz.edu</span>
+                <span>orionunhaz@gmail.com</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-4 h-4 text-gray-500 shrink-0" />
-                <span>+1 (234) 567-890</span>
+                <span>085338833744</span>
               </li>
             </ul>
           </div>
         </div>
 
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
-          <p>© 2026 OrionUnhaz Robotics Club. All rights reserved.</p>
+          {/* <p>© 2026 OrionUnhaz Robotics Club. All rights reserved.</p> */}
+          <p>© 2026 Klub Robotika OrionUnhaz. Hak Cipta Dilindungi.</p>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+            {/* <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-white transition-colors">Terms of Service</a> */}
+            <a href="#" className="hover:text-white transition-colors">Kebijakan Privasi</a>
+            <a href="#" className="hover:text-white transition-colors">Syarat Ketentuan Servis</a>
           </div>
         </div>
       </div>

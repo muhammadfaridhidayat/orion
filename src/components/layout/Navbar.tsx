@@ -47,9 +47,16 @@ export function Navbar() {
 
         <div className="hidden md:flex items-center gap-8 text-sm font-medium">
           <Link href="/#about" className="text-gray-300 hover:text-white transition-colors">About</Link>
+          {/* <Link href="/#about" className="text-gray-300 hover:text-white transition-colors">Tentang</Link> */}
+
           <Link href="/#divisions" className="text-gray-300 hover:text-white transition-colors">Divisions</Link>
+          {/* <Link href="/#divisions" className="text-gray-300 hover:text-white transition-colors">Divisi</Link> */}
+
           <Link href="/#gallery" className="text-gray-300 hover:text-white transition-colors">Gallery</Link>
+          {/* <Link href="/#gallery" className="text-gray-300 hover:text-white transition-colors">Galeri</Link> */}
+
           <Link href="/login" className="text-gray-500 hover:text-white transition-colors">Admin Login</Link>
+          {/* <Link href="/login" className="text-gray-500 hover:text-white transition-colors">Masuk Admin</Link> */}
         </div>
 
         <Link
@@ -57,6 +64,7 @@ export function Navbar() {
           className="px-6 py-2.5 rounded-full bg-white text-black text-sm font-semibold hover:bg-gray-200 transition-colors"
         >
           Join Members
+          {/* Gabung Anggota */}
         </Link>
       </div>
     </motion.nav>

@@ -8,32 +8,40 @@ export function WhatWeBuildSection() {
     {
       id: "embedded",
       title: "Embedded Systems",
+      // title: "Sistem Tertanam",
       icon: <Cpu className="w-10 h-10 text-green-400" />,
-      description: "Designing and programming microcontroller-based systems (STM32, ESP32, Arduino) that serve as the brain of our robotics applications, ensuring real-time response and reliability.",
+      // description: "Designing and programming microcontroller-based systems (STM32, ESP32, Arduino) that serve as the brain of our robotics applications, ensuring real-time response and reliability.",
+      description: "Merancang dan memprogram sistem berbasis mikrokontroler (STM32, ESP32, Arduino) yang berfungsi sebagai otak dari aplikasi robotika kami, memastikan respons waktu nyata dan keandalan.",
       color: "from-white/[0.05] to-transparent",
       borderColor: "border-white/10",
     },
     {
       id: "software",
       title: "Software & AI",
+      // title: "Perangkat Lunak & AI",
       icon: <Terminal className="w-10 h-10 text-blue-400" />,
-      description: "Developing complex software solutions, from robot control systems using ROS to computer vision models and AI pathfinding algorithms for autonomous navigation.",
+      // description: "Developing complex software solutions, from robot control systems using ROS to computer vision models and AI pathfinding algorithms for autonomous navigation.",
+      description: "Mengembangkan solusi perangkat lunak yang kompleks, mulai dari sistem kendali robot menggunakan ROS hingga model visi komputer dan algoritma navigasi AI untuk navigasi otonom.",
       color: "from-white/[0.05] to-transparent",
       borderColor: "border-white/10",
     },
     {
       id: "electronics",
       title: "Electronics",
+      // title: "Elektronik",
       icon: <Zap className="w-10 h-10 text-yellow-400" />,
-      description: "Building robust electronic circuits from scratch. This includes power distribution, sensor integration, actuator control, and custom custom PCB layout design.",
+      // description: "Building robust electronic circuits from scratch. This includes power distribution, sensor integration, actuator control, and custom custom PCB layout design.",
+      description: "Membangun sirkuit elektronik yang tangguh dari awal. Ini termasuk distribusi daya, integrasi sensor, kendali aktuator, dan desain tata letak PCB kustom.",
       color: "from-white/[0.05] to-transparent",
       borderColor: "border-white/10",
     },
     {
       id: "mechanics",
       title: "Mechanics",
+      // title: "Mekanik",
       icon: <Wrench className="w-10 h-10 text-orange-400" />,
-      description: "Engineering durable structural frameworks. We utilize 3D computer-aided design (CAD), simulation, and fabrication to build chassis, motor mounts, and moving components.",
+      // description: "Engineering durable structural frameworks. We utilize 3D computer-aided design (CAD), simulation, and fabrication to build chassis, motor mounts, and moving components.",
+      description: "Merekayasa kerangka struktural yang tahan lama. Kami memanfaatkan desain berbantuan komputer 3D (CAD), simulasi, dan fabrikasi untuk membangun sasis, dudukan motor, dan komponen bergerak.",
       color: "from-white/[0.05] to-transparent",
       borderColor: "border-white/10",
     }
@@ -53,14 +61,19 @@ export function WhatWeBuildSection() {
           className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6"
         >
           <div className="max-w-2xl">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white glow-text">What We Build</h2>
+            <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">What We Build</h2>
+            {/* <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white glow-text">Apa yang Kami Bangun</h2> */}
             <div className="w-24 h-px bg-gradient-to-r from-gray-500 to-transparent mb-6 rounded-full" />
-            <p className="text-gray-400 text-lg">
+            {/* <p className="text-gray-400 text-lg">
               Our projects encompass all core pillars of robotics. Our teams collaborate closely across these domains to bring fully functional, autonomous robots to life.
+            </p> */}
+            <p className="text-gray-400 text-lg">
+              Proyek kami mencakup semua pilar inti robotika. Tim kami berkolaborasi erat di seluruh domain ini untuk menghidupkan robot otonom fungsional sepenuhnya.
             </p>
           </div>
           <button className="px-6 py-2 rounded-full border border-white/10 bg-[#050505] text-gray-300 hover:text-white hover:border-white/20 transition-all shrink-0 text-sm">
-            View Project Gallery
+            {/* View Project Gallery */}
+            Lihat Galeri Proyek
           </button>
         </motion.div>
 

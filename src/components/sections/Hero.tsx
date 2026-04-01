@@ -90,7 +90,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className="text-5xl md:text-7xl font-bold tracking-tight mb-6 glow-text"
+          className="text-5xl md:text-7xl font-bold tracking-tight mb-6"
         >
           Engineering the Future <br className="hidden md:block" /> of Robotics
         </motion.h1>

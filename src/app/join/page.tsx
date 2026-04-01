@@ -7,34 +7,47 @@ import { Navbar } from "@/components/layout/Navbar";
 
 export default function JoinInfoPage() {
   const requirements = [
-    "Currently enrolled as an active university student",
-    "Strong passion for robotics, programming, or engineering",
-    "Commitment to attend weekly workshops and meetings",
-    "Motivation letter explaining why you want to join",
-    "Proof of registration fee payment (Rp. 35.000)"
+    // "Currently enrolled as an active university student",
+    "Terdaftar sebagai mahasiswa aktif di Fakultas Teknik Universitas Hamzanwadi",
+    // "Strong passion for robotics, programming, or engineering",
+    "Memiliki minat yang kuat terhadap robotika, pemrograman, atau mekanik",
+    // "Commitment to attend weekly workshops and meetings",
+    "Siap berkomitmen, berproses, dan bertanggung jawab dalam setiap kegiatan",
+    // "Motivation letter explaining why you want to join",
+    "Surat motivasi yang menjelaskan mengapa Anda ingin bergabung",
+    "Bersedia membayar iuran kas setiap pekan",
+    // "Proof of registration fee payment (Rp. 35.000)"
+    "Bersedia membayar biaya registrasi sebesar Rp. 35.000",
   ];
 
   const steps = [
     {
       icon: <ClipboardList className="w-6 h-6 text-blue-400" />,
-      title: "1. Fill the Form",
-      description: "Submit your personal details, division preference, and motivation letter through our portal.",
+      // title: "1. Fill the Form",
+      title: "1. Isi Formulir",
+      // description: "Submit your personal details, division preference, and motivation letter through our portal.",
+      description: "Kirimkan data diri Anda, pilihan divisi, dan surat motivasi melalui portal kami.",
     },
     {
       icon: <ShieldCheck className="w-6 h-6 text-purple-400" />,
-      title: "2. Verification",
-      description: "Our admin team will review your submitted data and payment proof within 3-5 business days.",
+      // title: "2. Verification",
+      title: "2. Verifikasi",
+      // description: "Our admin team will review your submitted data and payment proof within 3-5 business days.",
+      description: "Tim admin kami akan meninjau data Anda dan bukti pembayaran dalam waktu 3-5 hari kerja.",
     },
     {
       icon: <UserCheck className="w-6 h-6 text-orange-400" />,
-      title: "3. Interview",
-      description: "Shortlisted candidates will be invited for a brief interview to discuss their motivation and skills.",
+      // title: "3. Interview",
+      title: "3. Wawancara",
+      // description: "Shortlisted candidates will be invited for a brief interview to discuss their motivation and skills.",
+      description: "Kandidat yang terpilih akan diundang untuk wawancara singkat untuk mendiskusikan motivasi dan keterampilan mereka.",
     },
     {
       icon: <CheckCircle2 className="w-6 h-6 text-green-400" />,
-      title: "4. Final Announcement",
-
-      description: "Successful applicants will be officially welcomed into the OrionUnhaz family.",
+      // title: "4. Final Announcement",
+      title: "4. Pengumuman Akhir",
+      // description: "Successful applicants will be officially welcomed into the OrionUnhaz family.",
+      description: "Pelamar yang berhasil akan disambut secara resmi ke dalam keluarga OrionUnhaz.",
     }
   ];
 
@@ -54,9 +67,14 @@ export default function JoinInfoPage() {
           className="text-center mb-16"
         >
           <span className="text-gray-400 font-mono tracking-wider text-sm mb-4 block">/// JOIN THE CREW</span>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 glow-text">Become a Member</h1>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          {/* <span className="text-gray-400 font-mono tracking-wider text-sm mb-4 block">/// GABUNG DENGAN TIM</span> */}
+          <h1 className="text-4xl md:text-6xl font-bold mb-6">Become a Member</h1>
+          {/* <h1 className="text-4xl md:text-6xl font-bold mb-6">Menjadi Anggota</h1> */}
+          {/* <p className="text-gray-400 text-lg max-w-2xl mx-auto">
             Ready to build the future? Review the requirements and recruitment process below before submitting your application.
+          </p> */}
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            Siap membangun masa depan? Tinjau persyaratan dan proses rekrutmen di bawah ini sebelum mengirimkan formulir Anda.
           </p>
         </motion.div>
 
@@ -67,9 +85,13 @@ export default function JoinInfoPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="md:col-span-2 glass-card p-8 rounded-3xl h-fit border border-white/10"
           >
-            <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
+            {/* <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
               <span className="w-8 h-8 rounded-full bg-white/10 text-white flex items-center justify-center text-sm">!</span>
               Requirements
+            </h2> */}
+            <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
+              <span className="w-8 h-8 rounded-full bg-white/10 text-white flex items-center justify-center text-sm">!</span>
+              Persyaratan
             </h2>
             <ul className="space-y-4">
               {requirements.map((req, i) => (
@@ -79,6 +101,13 @@ export default function JoinInfoPage() {
                 </li>
               ))}
             </ul>
+
+            <div className="mt-8 p-4 rounded-xl bg-white/5 border border-white/10 text-gray-300 text-sm leading-relaxed">
+              <strong className="text-white font-semibold flex items-center gap-2 mb-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-400"></span> Note:
+              </strong>
+              <span suppressHydrationWarning>Pembayaran dapat dilakukan melalui DANA (085338833744) atas nama Muhammad Farid Hidayat</span>
+            </div>
           </motion.div>
 
           <motion.div
@@ -87,7 +116,8 @@ export default function JoinInfoPage() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="md:col-span-3 relative"
           >
-            <h2 className="text-2xl font-bold mb-8">Registration Flow</h2>
+            {/* <h2 className="text-2xl font-bold mb-8">Registration Flow</h2> */}
+            <h2 className="text-2xl font-bold mb-8">Alur Pendaftaran</h2>
             <div className="space-y-6 relative before:absolute before:inset-0 before:ml-[1.4rem] before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-white/10 before:to-transparent">
               {steps.map((step, i) => (
                 <div key={i} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
@@ -110,16 +140,23 @@ export default function JoinInfoPage() {
           transition={{ duration: 0.6, delay: 0.5 }}
           className="flex flex-col items-center justify-center pt-8 border-t border-white/10"
         >
-          <p className="text-gray-400 mb-6 flex items-center gap-2">
+          {/* <p className="text-gray-400 mb-6 flex items-center gap-2">
             <CheckCircle2 className="w-5 h-5 text-green-500" />
             I have read and understood the requirements and process.
+          </p> */}
+          <p className="text-gray-400 mb-6 flex items-center gap-2">
+            <CheckCircle2 className="w-5 h-5 text-green-500" />
+            Saya telah membaca dan memahami persyaratan dan prosesnya.
           </p>
           <Link
             href="/register"
             className="group relative px-10 py-4 rounded-full bg-white text-black font-bold text-lg overflow-hidden transition-transform hover:scale-105 active:scale-95 flex items-center gap-2"
           >
-            <span className="relative z-10 flex items-center justify-center gap-2">
+            {/* <span className="relative z-10 flex items-center justify-center gap-2">
               Proceed to Registration <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </span> */}
+            <span className="relative z-10 flex items-center justify-center gap-2">
+              Lanjut ke Pendaftaran <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </span>
             <div className="absolute inset-0 bg-gradient-to-r from-gray-200 to-white opacity-0 group-hover:opacity-100 transition-opacity" />
           </Link>

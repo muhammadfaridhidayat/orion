@@ -8,29 +8,38 @@ export function DivisionsSection() {
     {
       id: "programming",
       title: "Programming Division",
+      // title: "Divisi Pemrograman",
+      // short: "PRG",
       short: "PRG",
       icon: <Code2 className="w-8 h-8 text-blue-400" />,
       color: "gray",
       focus: ["Algorithms", "ROS/ROS2", "Computer Vision", "App Development"],
-      description: "Writing the brain of the robot. From low-level sensor integration to high-level path planning and artificial intelligence models."
+      // description: "Writing the brain of the robot. From low-level sensor integration to high-level path planning and artificial intelligence models."
+      description: "Menulis otak robot. Dari integrasi sensor tingkat rendah hingga perencanaan jalur tingkat tinggi dan model kecerdasan buatan."
     },
     {
       id: "electronic",
       title: "Electronic Division",
+      // title: "Divisi Elektronik",
+      // short: "ELC",
       short: "ELC",
       icon: <Cpu className="w-8 h-8 text-purple-400" />,
       color: "gray",
       focus: ["PCB Design", "Power Systems", "Sensors", "Microcontrollers"],
-      description: "Designing the nervous system. Connecting the logical brain with the physical world through intricate wiring and custom circuit boards."
+      // description: "Designing the nervous system. Connecting the logical brain with the physical world through intricate wiring and custom circuit boards."
+      description: "Merancang sistem saraf. Menghubungkan otak logis dengan dunia fisik melalui pemasangan kabel yang rumit dan papan sirkuit kustom."
     },
     {
       id: "mechanic",
       title: "Mechanic Division",
+      // title: "Divisi Mekanik",
+      // short: "MEC",
       short: "MEC",
       icon: <Wrench className="w-8 h-8 text-orange-400" />,
       color: "gray",
       focus: ["CAD Modeling", "3D Printing", "CNC Machining", "Kinematics"],
-      description: "Building the body. Creating structural integrity, precision movement, and robust exterior protection for internal components."
+      // description: "Building the body. Creating structural integrity, precision movement, and robust exterior protection for internal components."
+      description: "Membangun tubuh. Menciptakan integritas struktural, gerakan presisi, dan perlindungan eksterior yang tangguh untuk komponen internal."
     }
   ];
 
@@ -45,9 +54,14 @@ export function DivisionsSection() {
           className="mb-16 text-center"
         >
           <span className="text-gray-500 font-mono tracking-wider text-sm mb-4 block">/// STRUCTURE</span>
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white glow-text">Club Divisions</h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
+          {/* <span className="text-gray-500 font-mono tracking-wider text-sm mb-4 block">/// STRUKTUR</span> */}
+          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">Club Divisions</h2>
+          {/* <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white glow-text">Divisi Klub</h2> */}
+          {/* <p className="text-gray-400 max-w-2xl mx-auto">
             OrionUnhaz is organized into three specialized divisions that work in harmony to produce competition-winning robotic systems.
+          </p> */}
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            OrionUnhaz diatur ke dalam tiga divisi khusus yang bekerja secara harmonis untuk menghasilkan sistem robot pemenang kompetisi.
           </p>
         </motion.div>
 
@@ -78,7 +92,8 @@ export function DivisionsSection() {
                 </p>
 
                 <div>
-                  <h4 className="text-xs uppercase tracking-wider text-gray-500 mb-3 font-semibold">Core Focus</h4>
+                  {/* <h4 className="text-xs uppercase tracking-wider text-gray-500 mb-3 font-semibold">Core Focus</h4> */}
+                  <h4 className="text-xs uppercase tracking-wider text-gray-500 mb-3 font-semibold">Fokus Utama</h4>
                   <div className="flex flex-wrap gap-2">
                     {div.focus.map((item, i) => (
                       <span key={i} className="text-xs px-2.5 py-1 rounded bg-white/5 text-gray-300 border border-white/10">

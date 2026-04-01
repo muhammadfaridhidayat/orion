@@ -8,17 +8,23 @@ export function AboutSection() {
     {
       icon: <Users className="w-8 h-8 text-blue-400" />,
       title: "Our Community",
-      description: "A passionate group of students dedicated to pushing the boundaries of robotics and AI at OrionUnhaz.",
+      // title: "Komunitas Kami",
+      // description: "A passionate group of students dedicated to pushing the boundaries of robotics and AI at OrionUnhaz.",
+      description: "Sekelompok mahasiswa yang berdedikasi tinggi untuk mendorong batas-batas robotika dan AI di OrionUnhaz.",
     },
     {
       icon: <Target className="w-8 h-8 text-purple-400" />,
       title: "Our Mission",
-      description: "To foster innovation, provide hands-on engineering experience, and compete at the highest levels of collegiate robotics.",
+      // title: "Misi Kami",
+      // description: "To foster innovation, provide hands-on engineering experience, and compete at the highest levels of collegiate robotics.",
+      description: "Untuk mendorong inovasi, memberikan pengalaman teknik secara langsung, dan bersaing di tingkat tertinggi robotika tingkat perguruan tinggi.",
     },
     {
       icon: <Rocket className="w-8 h-8 text-orange-400" />,
       title: "Our Vision",
-      description: "To be the premier university robotics hub that shapes the next generation of engineers and technologists.",
+      // title: "Visi Kami",
+      // description: "To be the premier university robotics hub that shapes the next generation of engineers and technologists.",
+      description: "Menjadi pusat robotika universitas utama yang membentuk generasi insinyur dan ahli teknologi berikutnya.",
     }
   ];
 
@@ -36,10 +42,14 @@ export function AboutSection() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 glow-text text-white">About OrionUnhaz</h2>
+          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">About OrionUnhaz</h2>
+          {/* <h2 className="text-3xl md:text-5xl font-bold mb-6 glow-text text-white">Tentang OrionUnhaz</h2> */}
           <div className="w-24 h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent mx-auto mb-6 rounded-full" />
-          <p className="text-gray-400 text-lg">
+          {/* <p className="text-gray-400 text-lg">
             We are the official robotics club of the university, acting as a bridge between theoretical learning and practical engineering. Since our inception, we have been building autonomous systems, participating in national competitions, and sharing our knowledge with the community.
+          </p> */}
+          <p className="text-gray-400 text-lg">
+            Kami adalah ukm robotika resmi Universitas Hamzanwadi, yang bertindak sebagai jembatan antara pembelajaran teoretis dan praktik teknik. Sejak awal mula, kami telah membangun sistem otonom, berpartisipasi dalam kompetisi nasional maupun internasional, dan berbagi pengetahuan dengan komunitas.
           </p>
         </motion.div>
 
