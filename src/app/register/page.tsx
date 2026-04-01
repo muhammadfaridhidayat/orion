@@ -1,11 +1,14 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import { UploadCloud, CheckCircle2, ArrowRight } from "lucide-react";
+import { UploadCloud, CheckCircle2, ArrowRight, X, AlertCircle, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { API_URL } from "@/lib/api";
+import { uploadToCloudinary, CloudinaryUploadError } from "@/lib/cloudinary";
+
+type UploadStatus = "idle" | "uploading" | "success" | "error";
 
 export default function RegisterPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -22,6 +25,12 @@ export default function RegisterPage() {
   const [errorMsg, setErrorMsg] = useState("");
   const [isRegistrationOpen, setIsRegistrationOpen] = useState<boolean | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+
+  // Cloudinary upload state
+  const [uploadStatus, setUploadStatus] = useState<UploadStatus>("idle");
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [cloudinaryUrl, setCloudinaryUrl] = useState<string | null>(null);
+  const [uploadError, setUploadError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!paymentProof) {
@@ -51,13 +60,54 @@ export default function RegisterPage() {
     checkRegistrationStatus();
   }, []);
 
+  // Upload file to Cloudinary when user selects a file
+  const handleFileSelect = async (file: File | null) => {
+    // Reset states
+    setUploadError(null);
+    setCloudinaryUrl(null);
+    setUploadProgress(0);
+
+    if (!file) {
+      setPaymentProof(null);
+      setUploadStatus("idle");
+      return;
+    }
+
+    setPaymentProof(file);
+    setUploadStatus("uploading");
+
+    try {
+      const result = await uploadToCloudinary(file, (percent) => {
+        setUploadProgress(percent);
+      });
+
+      setCloudinaryUrl(result.secure_url);
+      setUploadStatus("success");
+    } catch (error) {
+      setUploadStatus("error");
+      if (error instanceof CloudinaryUploadError) {
+        setUploadError(error.message);
+      } else {
+        setUploadError("Failed to upload file. Please try again.");
+      }
+    }
+  };
+
+  const handleRemoveFile = () => {
+    setPaymentProof(null);
+    setCloudinaryUrl(null);
+    setUploadStatus("idle");
+    setUploadProgress(0);
+    setUploadError(null);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setErrorMsg("");
 
-    if (!paymentProof) {
-      setErrorMsg("Please upload your payment proof.");
+    if (!cloudinaryUrl) {
+      setErrorMsg("Please upload your payment proof and wait for it to finish.");
       setIsLoading(false);
       return;
     }
@@ -71,7 +121,8 @@ export default function RegisterPage() {
       submitData.append("devision", formData.division);
       submitData.append("motivation", formData.motivation);
 
-      submitData.append("payment", paymentProof);
+      // Send the Cloudinary URL instead of the raw file
+      submitData.append("payment", cloudinaryUrl);
 
       const response = await fetch(`${API_URL}/api/v1/member/register`, {
         method: "POST",
@@ -272,49 +323,136 @@ export default function RegisterPage() {
               />
             </div>
 
+            {/* Payment Proof Upload with Cloudinary */}
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">Payment Proof (PDF/JPG/PNG)</label>
-              <div className="w-full border-2 border-dashed border-white/10 rounded-xl p-8 hover:bg-white/5 hover:border-white/20 transition-colors cursor-pointer flex flex-col items-center justify-center text-gray-400 group relative overflow-hidden">
-                <input
-                  type="file"
-                  accept=".pdf,.jpg,.jpeg,.png"
-                  onChange={(e) => setPaymentProof(e.target.files?.[0] || null)}
-                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
-                  required
-                />
-                
-                {previewUrl ? (
-                  paymentProof?.type.startsWith('image/') ? (
-                    /* eslint-disable-next-line @next/next/no-img-element */
-                    <img src={previewUrl} alt="Payment Proof Preview" className="max-h-48 object-contain rounded-lg mb-3 shadow-lg" />
-                  ) : (
-                    <div className="flex flex-col items-center">
-                      <svg className="w-16 h-16 text-blue-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                      </svg>
-                      <span className="text-sm font-medium text-blue-400">Document Selected</span>
-                    </div>
-                  )
-                ) : (
-                  <UploadCloud className="w-8 h-8 mb-3 group-hover:text-blue-400 transition-colors" />
+              <label className="block text-sm font-medium text-gray-300 mb-2">Payment Proof (JPG/PNG)</label>
+
+              <AnimatePresence mode="wait">
+                {uploadStatus === "idle" && (
+                  <motion.div
+                    key="dropzone"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    className="w-full border-2 border-dashed border-white/10 rounded-xl p-8 hover:bg-white/5 hover:border-white/20 transition-colors cursor-pointer flex flex-col items-center justify-center text-gray-400 group relative overflow-hidden"
+                  >
+                    <input
+                      type="file"
+                      accept=".jpg,.jpeg,.png"
+                      onChange={(e) => handleFileSelect(e.target.files?.[0] || null)}
+                      className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                    />
+                    <UploadCloud className="w-8 h-8 mb-3 group-hover:text-blue-400 transition-colors" />
+                    <span className="text-sm text-center">Click to upload or drag and drop</span>
+                    <span className="text-xs text-gray-600 mt-1">Max file size: 5MB</span>
+                  </motion.div>
                 )}
 
-                <span className="text-sm text-center mt-2 px-2 truncate w-full max-w-[250px] relative z-20 pointer-events-none">
-                  {paymentProof ? paymentProof.name : "Click to upload or drag and drop"}
-                </span>
-                {!paymentProof && <span className="text-xs text-gray-600 mt-1 relative z-20 pointer-events-none">Max file size: 5MB</span>}
-              </div>
+                {uploadStatus === "uploading" && (
+                  <motion.div
+                    key="uploading"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    className="w-full border border-blue-500/30 bg-blue-500/5 rounded-xl p-6 flex flex-col items-center justify-center"
+                  >
+                    <Loader2 className="w-8 h-8 text-blue-400 animate-spin mb-3" />
+                    <span className="text-sm text-blue-300 font-medium mb-3">Uploading to cloud...</span>
+
+                    {/* Progress bar */}
+                    <div className="w-full max-w-xs h-2 bg-white/10 rounded-full overflow-hidden">
+                      <motion.div
+                        className="h-full bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full"
+                        initial={{ width: 0 }}
+                        animate={{ width: `${uploadProgress}%` }}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                      />
+                    </div>
+                    <span className="text-xs text-gray-500 mt-2">{uploadProgress}% complete</span>
+                    {paymentProof && (
+                      <span className="text-xs text-gray-600 mt-1 truncate max-w-[250px]">{paymentProof.name}</span>
+                    )}
+                  </motion.div>
+                )}
+
+                {uploadStatus === "success" && (
+                  <motion.div
+                    key="success"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    className="w-full border border-green-500/30 bg-green-500/5 rounded-xl p-6 relative"
+                  >
+                    {/* Remove button */}
+                    <button
+                      type="button"
+                      onClick={handleRemoveFile}
+                      className="absolute top-3 right-3 p-1.5 rounded-lg bg-white/10 hover:bg-red-500/20 text-gray-400 hover:text-red-400 transition-colors z-20"
+                      title="Remove file"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+
+                    <div className="flex flex-col items-center">
+                      {/* Image preview */}
+                      {previewUrl && paymentProof?.type.startsWith("image/") && (
+                        /* eslint-disable-next-line @next/next/no-img-element */
+                        <img
+                          src={previewUrl}
+                          alt="Payment Proof Preview"
+                          className="max-h-48 object-contain rounded-lg mb-4 shadow-lg border border-white/10"
+                        />
+                      )}
+
+                      <div className="flex items-center gap-2 mb-1">
+                        <CheckCircle2 className="w-5 h-5 text-green-400" />
+                        <span className="text-sm font-medium text-green-300">Upload successful</span>
+                      </div>
+                      <span className="text-xs text-gray-500 truncate max-w-[250px]">
+                        {paymentProof?.name}
+                      </span>
+                    </div>
+                  </motion.div>
+                )}
+
+                {uploadStatus === "error" && (
+                  <motion.div
+                    key="error"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    className="w-full border border-red-500/30 bg-red-500/5 rounded-xl p-6"
+                  >
+                    <div className="flex flex-col items-center">
+                      <AlertCircle className="w-8 h-8 text-red-400 mb-3" />
+                      <span className="text-sm font-medium text-red-300 mb-1">Upload failed</span>
+                      <span className="text-xs text-red-400/80 text-center mb-4">{uploadError}</span>
+
+                      <button
+                        type="button"
+                        onClick={handleRemoveFile}
+                        className="px-4 py-2 rounded-lg bg-white/10 hover:bg-white/15 text-sm text-gray-300 transition-colors"
+                      >
+                        Try again
+                      </button>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             <div className="pt-6">
               <button
                 id="submitBtn"
                 type="submit"
-                disabled={isLoading}
+                disabled={isLoading || uploadStatus === "uploading" || uploadStatus === "error"}
                 className="w-full py-4 rounded-xl bg-white text-black font-bold hover:bg-gray-200 focus:ring-4 focus:ring-white/20 transition-all flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isLoading ? (
-                  <span className="animate-pulse">Submitting...</span>
+                  <span className="flex items-center gap-2">
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    Submitting...
+                  </span>
                 ) : (
                   <>
                     Submit Application <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

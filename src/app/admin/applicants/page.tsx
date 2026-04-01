@@ -79,7 +79,9 @@ export default function ApplicantsPage() {
   });
 
   const openPaymentModal = (url: string) => {
-    setSelectedPaymentUrl(API_URL + url);
+    // If it's already a full URL (Cloudinary), use it directly;
+    // otherwise prepend API_URL for legacy local paths
+    setSelectedPaymentUrl(url.startsWith("http") ? url : API_URL + url);
     setPaymentModalOpen(true);
   };
 
