@@ -1,11 +1,98 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Cpu, CircuitBoard, Wrench, Code } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import Image from "next/image";
+
+const collageImages = [
+  "https://res.cloudinary.com/dxrxewurm/image/upload/v1775153256/hero1_a0zjls.jpg",
+  "https://res.cloudinary.com/dxrxewurm/image/upload/v1775153256/hero2_ik1dpq.jpg",
+  "https://res.cloudinary.com/dxrxewurm/image/upload/v1775153251/hero3_gwgzwl.jpg",
+  "https://res.cloudinary.com/dxrxewurm/image/upload/v1775153248/hero4_vndva5.jpg",
+  "https://res.cloudinary.com/dxrxewurm/image/upload/v1775153250/hero5_nizpwn.jpg",
+  "https://res.cloudinary.com/dxrxewurm/image/upload/v1775153252/hero6_ezbk9o.jpg",
+  "https://res.cloudinary.com/dxrxewurm/image/upload/v1775153250/hero7_m2fjb7.jpg",
+  "https://res.cloudinary.com/dxrxewurm/image/upload/v1775153244/hero8_ngrdr6.jpg",
+  "https://res.cloudinary.com/dxrxewurm/image/upload/v1775153246/hero9_hypqkf.jpg",
+  "https://res.cloudinary.com/dxrxewurm/image/upload/v1775153255/hero10_cpzaj7.jpg",
+  "https://res.cloudinary.com/dxrxewurm/image/upload/v1775153251/hero11_jdvqc9.jpg",
+  "https://res.cloudinary.com/dxrxewurm/image/upload/v1775153262/hero12_vodrfq.jpg",
+  "https://res.cloudinary.com/dxrxewurm/image/upload/v1775153262/hero13_a5fb7q.jpg",
+  "https://res.cloudinary.com/dxrxewurm/image/upload/v1775153248/hero14_mtxmge.jpg",
+];
+
+const collageLayout = [
+  // Top Left cluster
+  { w: "32%", h: "40%", t: "-8%", l: "-5%", r: "-4deg", z: 0 },
+  { w: "25%", h: "35%", t: "5%", l: "15%", r: "3deg", z: 20 },
+  { w: "20%", h: "28%", t: "25%", l: "-2%", r: "-2deg", z: 10 },
+
+  // Top Right cluster
+  { w: "35%", h: "45%", t: "-10%", l: "65%", r: "2deg", z: 0 },
+  { w: "24%", h: "33%", t: "10%", l: "45%", r: "-5deg", z: 10 },
+  { w: "28%", h: "30%", t: "20%", l: "80%", r: "4deg", z: 20 },
+
+  // Middle Left cluster
+  { w: "30%", h: "38%", t: "45%", l: "-10%", r: "5deg", z: 10 },
+  { w: "22%", h: "25%", t: "55%", l: "12%", r: "-3deg", z: 30 },
+
+  // Middle Center cluster
+  { w: "26%", h: "35%", t: "40%", l: "30%", r: "-1deg", z: 20 },
+  { w: "34%", h: "28%", t: "35%", l: "52%", r: "6deg", z: 30 },
+
+  // Middle Right cluster
+  { w: "27%", h: "42%", t: "50%", l: "75%", r: "-4deg", z: 10 },
+
+  // Bottom Left cluster
+  { w: "38%", h: "33%", t: "80%", l: "-5%", r: "-2deg", z: 20 },
+  { w: "23%", h: "26%", t: "72%", l: "20%", r: "4deg", z: 10 },
+
+  // Bottom Right cluster
+  { w: "31%", h: "40%", t: "75%", l: "42%", r: "-3deg", z: 20 },
+  { w: "29%", h: "35%", t: "85%", l: "70%", r: "2deg", z: 30 },
+  { w: "21%", h: "30%", t: "65%", l: "85%", r: "-5deg", z: 0 },
+];
 
 export function HeroSection() {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#050505]">
+      {/* Background Photo Collage */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-[#050505]">
+        <div className="absolute w-full h-[120%] -top-[10%] left-0 opacity-90">
+          {collageImages.map((src, idx) => {
+            const layout = collageLayout[idx];
+            if (!layout) return null;
+            return (
+              <div
+                key={idx}
+                className="absolute overflow-hidden rounded-xl border border-white/20 shadow-2xl"
+                style={{
+                  width: layout.w,
+                  height: layout.h,
+                  top: layout.t,
+                  left: layout.l,
+                  transform: `rotate(${layout.r})`,
+                  zIndex: layout.z,
+                }}
+              >
+                <Image
+                  src={src}
+                  alt={`Background collage image ${idx + 1}`}
+                  fill
+                  className="object-cover grayscale brightness-90 saturate-50"
+                  sizes="(max-width: 1024px) 50vw, 33vw"
+                  priority={idx < 4}
+                />
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Overlay overlays to ensure text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/90 via-[#050505]/30 to-[#050505]/90" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_#050505_100%)] opacity-60" />
+      </div>
+
       {/* Background gradients */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-emerald-100/5 rounded-full blur-[100px] pointer-events-none" />
@@ -13,66 +100,7 @@ export function HeroSection() {
       {/* Grid Pattern */}
       <div className="absolute inset-0 bg-grid opacity-[0.03] pointer-events-none" />
 
-      {/* Floating Nodes (simulating the design inspiration) */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.5, duration: 1 }}
-        className="absolute top-[20%] left-[15%] hidden md:flex items-center gap-3 text-sm text-gray-400"
-      >
-        <div className="w-8 h-8 rounded-full border border-gray-800 glass flex items-center justify-center">
-          <Code className="w-4 h-4 text-blue-400" />
-        </div>
-        <div>
-          <div className="text-white text-xs font-semibold">Programming</div>
-          <div className="text-[10px]">Division</div>
-        </div>
-      </motion.div>
 
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.7, duration: 1 }}
-        className="absolute bottom-[30%] left-[20%] hidden md:flex items-center gap-3 text-sm text-gray-400"
-      >
-        <div className="w-8 h-8 rounded-full border border-gray-800 glass flex items-center justify-center">
-          <CircuitBoard className="w-4 h-4 text-purple-400" />
-        </div>
-        <div>
-          <div className="text-white text-xs font-semibold">Electronics</div>
-          <div className="text-[10px]">Division</div>
-        </div>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.6, duration: 1 }}
-        className="absolute top-[30%] right-[15%] hidden md:flex flex-row-reverse items-center gap-3 text-sm text-gray-400 text-right"
-      >
-        <div className="w-8 h-8 rounded-full border border-gray-800 glass flex items-center justify-center">
-          <Wrench className="w-4 h-4 text-orange-400" />
-        </div>
-        <div>
-          <div className="text-white text-xs font-semibold">Mechanics</div>
-          <div className="text-[10px]">Division</div>
-        </div>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.8, duration: 1 }}
-        className="absolute bottom-[20%] right-[25%] hidden md:flex flex-row-reverse items-center gap-3 text-sm text-gray-400 text-right"
-      >
-        <div className="w-8 h-8 rounded-full border border-gray-800 glass flex items-center justify-center">
-          <Cpu className="w-4 h-4 text-green-400" />
-        </div>
-        <div>
-          <div className="text-white text-xs font-semibold">Embedded</div>
-          <div className="text-[10px]">Systems</div>
-        </div>
-      </motion.div>
 
       {/* Main Content */}
       <div className="relative z-10 container mx-auto px-4 flex flex-col items-center text-center">

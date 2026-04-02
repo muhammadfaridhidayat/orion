@@ -61,7 +61,7 @@ export function DivisionsSection() {
             OrionUnhaz is organized into three specialized divisions that work in harmony to produce competition-winning robotic systems.
           </p> */}
           <p className="text-gray-400 max-w-2xl mx-auto">
-            OrionUnhaz diatur ke dalam tiga divisi khusus yang bekerja secara harmonis untuk menghasilkan sistem robot pemenang kompetisi.
+            OrionUnhaz diatur ke dalam tiga divisi khusus yang bekerja secara harmonis sehingga dapat menghasilkan sistem robot untuk kompetisi.
           </p>
         </motion.div>
 

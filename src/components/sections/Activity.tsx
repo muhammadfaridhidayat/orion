@@ -28,7 +28,7 @@ export function ActivitySection() {
               Moments from our workshops, hackathons, and national competitions.
             </p> */}
             <p className="text-gray-400 max-w-lg">
-              Momen-momen dari lokakarya, hackathon, dan kompetisi tingkat nasional kami.
+              Momen-momen dari lokakarya dan kompetisi tingkat nasional kami.
             </p>
           </motion.div>
           <motion.button

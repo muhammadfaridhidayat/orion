@@ -68,7 +68,7 @@ export function WhatWeBuildSection() {
               Our projects encompass all core pillars of robotics. Our teams collaborate closely across these domains to bring fully functional, autonomous robots to life.
             </p> */}
             <p className="text-gray-400 text-lg">
-              Proyek kami mencakup semua pilar inti robotika. Tim kami berkolaborasi erat di seluruh domain ini untuk menghidupkan robot otonom fungsional sepenuhnya.
+              Proyek kami mencakup semua pilar inti robotika. Tim kami berkolaborasi erat di seluruh bidang ini untuk menghidupkan robot otonom fungsional sepenuhnya.
             </p>
           </div>
           <button className="px-6 py-2 rounded-full border border-white/10 bg-[#050505] text-gray-300 hover:text-white hover:border-white/20 transition-all shrink-0 text-sm">
