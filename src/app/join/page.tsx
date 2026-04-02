@@ -14,7 +14,6 @@ export default function JoinInfoPage() {
     // "Commitment to attend weekly workshops and meetings",
     "Siap berkomitmen, berproses, dan bertanggung jawab dalam setiap kegiatan",
     // "Motivation letter explaining why you want to join",
-    "Surat motivasi yang menjelaskan mengapa Anda ingin bergabung",
     "Bersedia membayar iuran kas setiap pekan",
     // "Proof of registration fee payment (Rp. 35.000)"
     "Bersedia membayar biaya registrasi sebesar Rp. 35.000",

@@ -14,10 +14,10 @@ const collageImages = [
   "https://res.cloudinary.com/dxrxewurm/image/upload/v1775153250/hero7_m2fjb7.jpg",
   "https://res.cloudinary.com/dxrxewurm/image/upload/v1775153244/hero8_ngrdr6.jpg",
   "https://res.cloudinary.com/dxrxewurm/image/upload/v1775153246/hero9_hypqkf.jpg",
-  "https://res.cloudinary.com/dxrxewurm/image/upload/v1775153255/hero10_cpzaj7.jpg",
-  "https://res.cloudinary.com/dxrxewurm/image/upload/v1775153251/hero11_jdvqc9.jpg",
-  "https://res.cloudinary.com/dxrxewurm/image/upload/v1775153262/hero12_vodrfq.jpg",
-  "https://res.cloudinary.com/dxrxewurm/image/upload/v1775153262/hero13_a5fb7q.jpg",
+  "https://res.cloudinary.com/dxrxewurm/image/upload/v1775157245/hero10_cymu0n.jpg",
+  "https://res.cloudinary.com/dxrxewurm/image/upload/v1775157245/hero11_bkiubm.jpg",
+  "https://res.cloudinary.com/dxrxewurm/image/upload/v1775157246/hero12_prfxpl.jpg",
+  "https://res.cloudinary.com/dxrxewurm/image/upload/v1775157250/hero13_mhc9rr.jpg",
   "https://res.cloudinary.com/dxrxewurm/image/upload/v1775153248/hero14_mtxmge.jpg",
 ];
 

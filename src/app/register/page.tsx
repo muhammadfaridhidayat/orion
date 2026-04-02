@@ -261,7 +261,7 @@ export default function RegisterPage() {
                   value={formData.fullName}
                   onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                   className="w-full bg-black/50 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-gray-600 focus:outline-none focus:border-gray-400/50 transition-colors"
-                  placeholder="John Doe"
+                  placeholder="Budi Santoso"
                 />
               </div>
               <div>
