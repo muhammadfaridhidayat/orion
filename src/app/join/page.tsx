@@ -32,21 +32,21 @@ export default function JoinInfoPage() {
       // title: "2. Verification",
       title: "2. Verifikasi",
       // description: "Our admin team will review your submitted data and payment proof within 3-5 business days.",
-      description: "Tim admin kami akan meninjau data Anda dan bukti pembayaran dalam waktu 3-5 hari kerja.",
+      description: "Tim admin kami akan meninjau data Anda dan bukti pembayaran dalam waktu 1-2 hari.",
     },
     {
       icon: <UserCheck className="w-6 h-6 text-orange-400" />,
       // title: "3. Interview",
       title: "3. Wawancara",
       // description: "Shortlisted candidates will be invited for a brief interview to discuss their motivation and skills.",
-      description: "Kandidat yang terpilih akan diundang untuk wawancara singkat untuk mendiskusikan motivasi dan keterampilan mereka.",
+      description: "Kandidat akan langsung diundang untuk wawancara singkat untuk mendiskusikan motivasi dan keterampilan mereka.",
     },
     {
       icon: <CheckCircle2 className="w-6 h-6 text-green-400" />,
       // title: "4. Final Announcement",
       title: "4. Pengumuman Akhir",
       // description: "Successful applicants will be officially welcomed into the OrionUnhaz family.",
-      description: "Pelamar yang berhasil akan disambut secara resmi ke dalam keluarga OrionUnhaz.",
+      description: "Pelamar akan disambut secara resmi ke dalam keluarga OrionUnhaz.",
     }
   ];
 
