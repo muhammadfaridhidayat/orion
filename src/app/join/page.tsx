@@ -75,6 +75,9 @@ export default function JoinInfoPage() {
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
             Siap membangun masa depan? Tinjau persyaratan dan proses rekrutmen di bawah ini sebelum mengirimkan formulir Anda.
           </p>
+          <div className="mt-6 inline-block px-6 py-3 rounded-full bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 text-sm font-medium">
+            Pendaftaran Diperpanjang Sampai Juma't, 17 April 2026
+          </div>
         </motion.div>
 
         <div className="grid md:grid-cols-5 gap-8 mb-16">
